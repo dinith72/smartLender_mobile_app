@@ -6,6 +6,7 @@ import 'package:mobile_app/components/CustomDrawer.dart';
 
 // imoprting screens
 import 'package:mobile_app/screens/login.dart';
+import 'package:mobile_app/screens/paymentsManager.dart';
 
 
 void main() => runApp(new MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
     routes: <String,WidgetBuilder>{
       '/Login' : (BuildContext context) => new Login(),
       '/Home' : (BuildContext context) => new MyHomePage(),
+      '/Payments' : (BuildContext context) => new PaymentsManager(),
     },
       home: new Login(),
     );
@@ -49,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return new Scaffold(
-      appBar: new CustomAppBar().getAppBar(context),
+      appBar: new CustomAppBar().getAppBar(context,'Summary'),
       body: new Center(
 
         child: new Column(
