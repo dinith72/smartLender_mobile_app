@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/controller/LoginController.dart';
-import 'package:mobile_app/databaseConn.dart';
+import 'package:mobile_app/components/alertWindow.dart';
 import 'package:mobile_app/main.dart';
 
 class Login extends StatefulWidget{
@@ -45,18 +45,8 @@ class _Login extends State<Login>{
                               Navigator.pushNamed(context, '/Home');
                             }
                             else {
-                               alert = new AlertDialog( // creating the alert dialog
-                                  content: new Column( // setting the content
-                                    children: <Widget>[
-
-                                      new Text('incorrect password'), // text
-                                      new RaisedButton(onPressed:(){Navigator.pop(context);}  , child: new Text('Ok'),), // on click button to close when it is pressed
-                                    ],
-                                  ),
-
-                                  title: new Icon(Icons.warning) // title of the alert button is set an icon
-                              );
-                              Navigator.pushNamed(context, '/Login');
+                                alert = new alertWindow().WarningWindow(context);
+                                Navigator.pushNamed(context, '/Login');
 
                             }
                             if(alert != null){

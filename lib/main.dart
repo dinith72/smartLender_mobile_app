@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
+//importing components
+import 'package:mobile_app/components/appBar.dart';
+import 'package:mobile_app/components/CustomDrawer.dart';
+
 // imoprting screens
 import 'package:mobile_app/screens/login.dart';
+
 
 void main() => runApp(new MyApp());
 
@@ -13,14 +18,14 @@ class MyApp extends StatelessWidget {
       title: 'SmartLender',
       theme: new ThemeData(
 
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.amber,
       ),
 
     routes: <String,WidgetBuilder>{
       '/Login' : (BuildContext context) => new Login(),
       '/Home' : (BuildContext context) => new MyHomePage(),
     },
-      home: new MyHomePage(title: 'Home'),
+      home: new Login(),
     );
   }
 }
@@ -44,16 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return new Scaffold(
-      appBar: new AppBar(
-
-        title: new Text('HOME'),
-        actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.exit_to_app), onPressed: () {
-            Navigator.pushNamed(context, '/Login');
-
-          }),
-        ],
-      ),
+      appBar: new CustomAppBar().getAppBar(context),
       body: new Center(
 
         child: new Column(
@@ -67,6 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      drawer: new CustomDrawer().getDrawer(context),
+      
 //      This trailing comma makes auto-formatting nicer for build methods.
     );
   }
