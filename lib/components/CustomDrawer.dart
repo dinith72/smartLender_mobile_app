@@ -4,44 +4,80 @@ class CustomDrawer{
 
   Drawer getDrawer(context){
     return (
-      new Drawer(
+        new Drawer(
 
-        elevation: 10.0,
-        child: new Container(
+          elevation: 10.0,
+          child: new Container(
 
-          color: Colors.black,
-          alignment: Alignment.topLeft,
+            color: Colors.black,
+            alignment: Alignment.topLeft,
 
 
-          padding: new EdgeInsets.symmetric(vertical: 30.0,horizontal: 1.0),
-          child: new Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-//                  adding some drawer tiles
-              new FlatButton.icon(
+            padding: new EdgeInsets.symmetric(vertical: 30.0,horizontal: 1.0),
+            child: new Column(
+//            mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
 
-                  onPressed: (){Navigator.pushNamed(context, '/Home');},
-                  icon: new Icon(Icons.list , color: new Color.fromRGBO(204, 159, 14, 1.0), size: 35.0,),
-                  label: new Text(
-                    'Summary' ,
-                    style: new TextStyle(fontSize:25.0 , color: Colors.white),
+              children: <Widget>[
+
+                new Container(
+                  child: new FlatButton.icon(
+
+                    onPressed: (){Navigator.pushNamed(context, '/Home');},
+                    icon: new Icon(Icons.list , color: new Color.fromRGBO(204, 159, 14, 1.0), size: 35.0),
+                    label: new Text(
+                      'Home' ,
+                      style: new TextStyle(fontSize:25.0 , color: Colors.white),
+                    ),
                   ),
+                  margin: const EdgeInsets.symmetric(vertical: 15.0),
+                ),
 
-              ),
-              new FlatButton.icon(
+                new Container(
+                    child:new FlatButton.icon(
 
-                  onPressed: (){Navigator.pushNamed(context, '/Payments');},
-                  icon: new Icon(Icons.payment , color: new Color.fromRGBO(204, 159, 14, 1.0), size: 35.0,),
-                  label: new Text(
-                    'Payments' ,
-                    style: new TextStyle( fontSize: 25.0 ,color: Colors.white, )
-                  )
-              ),
+                      onPressed: (){Navigator.pushNamed(context, '/Payments');},
+                      icon: new Icon(Icons.info , color: new Color.fromRGBO(204, 159, 14, 1.0), size: 35.0,),
+                      label: new Text(
+                          'Customer Info' ,
+                          style: new TextStyle( fontSize: 25.0 ,color: Colors.white, )
+                      ) ,
+                    ),
+                  margin: const EdgeInsets.symmetric(vertical: 15.0),
+                ),
+                new Container(
+                  child:  new FlatButton.icon(
+
+                      onPressed: (){Navigator.pushNamed(context, '/Payments');},
+                      icon: new Icon(Icons.payment , color: new Color.fromRGBO(204, 159, 14, 1.0), size: 35.0,),
+                      label: new Text(
+                          'Payments' ,
+                          style: new TextStyle( fontSize: 25.0 ,color: Colors.white, )
+                      )
+                  ),
+                  margin: const EdgeInsets.symmetric(vertical: 15.0),
+
+                ),
+                new Container(
+                  child:  new FlatButton.icon(
+
+                      onPressed: (){Navigator.pushNamed(context, '/Payments');},
+                      icon: new Icon(Icons.people , color: new Color.fromRGBO(204, 159, 14, 1.0), size: 35.0,),
+                      label: new Text(
+                          'Attendence' ,
+                          style: new TextStyle( fontSize: 25.0 ,color: Colors.white, )
+                      )
+                  ),
+                  margin: const EdgeInsets.symmetric(vertical: 15.0),
+
+                ),
+
+
 //
-            ],
+              ],
+            ),
           ),
-        ),
-      )
+        )
     );
   }
 }
