@@ -6,4 +6,11 @@ class PaymentManagerDataLoader{
 
     return teams;
   }
+
+  List <String> getMembers(){
+    List<String> members = new List<String>();
+    members.addAll(['Dinith Jayabodhi', 'chamaka rajapakshe','wisura weerathunga','a','a','v']);
+
+    return members;
+  }
 }

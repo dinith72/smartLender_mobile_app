@@ -16,10 +16,13 @@ class _PaymentsManager extends State<PaymentsManager>{
   String _textval = "Collections";
   Color _textColor = Colors.green;
   List <String> teams = new List<String>();
+  List <String> members = new List<String>();
   String _teamVal ;
   void initState(){
     teams = PaymentManagerDataLoader().getTeams();
+    members = PaymentManagerDataLoader().getMembers();
     _teamVal = teams[0];
+
   }
 
 
@@ -47,40 +50,75 @@ class _PaymentsManager extends State<PaymentsManager>{
     return new Scaffold(
         appBar: new CustomAppBar().getAppBar(context,'Payments Manager'),
         drawer: new CustomDrawer().getDrawer(context),
-        body: new Container(
-            padding: new EdgeInsets.all(32.0),
-            child: new Center(
-                child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      new TextField(
-                          decoration: new InputDecoration(
-                              hintText: "Please enter center"
-                          )),
-                      new DropdownButton(
-                          value: _teamVal,
-                          items: teams.map((String val){
-                            return new DropdownMenuItem(child: new Text(val), value: val );
-                          }).toList(),
-                          onChanged:(String val){teamOnChanged(val);}
+        body: new CustomScrollView(
+          shrinkWrap: true,
+          slivers: <Widget>[
+            new SliverPadding(
+              padding: const EdgeInsets.all(0.0),
+              sliver: new SliverList(
+                delegate: new SliverChildListDelegate(
+                  <Widget>[
+                    _getComponents()
 
+                  ],
+                ),
+              ),
+            ),
+          ],
+        )
+    );
+
+  }
+
+  Container _getComponents(){
+    return new Container(
+        padding: new EdgeInsets.all(32.0),
+        child: new Center(
+            child: new Column(
+
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.max,
+
+                children: <Widget>[
+                  new TextField(
+                      decoration: new InputDecoration(
+                          hintText: "Please enter center"
+                      )),
+                  new DropdownButton(
+                      value: _teamVal,
+                      items: teams.map((String val){
+                        return new DropdownMenuItem(child: new Text(val), value: val );
+                      }).toList(),
+                      onChanged:(String val){teamOnChanged(val);}
+
+                  ),
+                  new Row(
+                    children: <Widget>[
+                      new Switch(
+                          value: _collecting,
+                          onChanged: (bool val){switchPaymentOnClick(val);
+                          }
                       ),
-                      new Row(
-                        children: <Widget>[
-                          new Switch(
-                              value: _collecting,
-                              onChanged: (bool val){switchPaymentOnClick(val);
-                              }
-                          ),
-                          new Text(_textval ,style: new TextStyle(color: _textColor , fontSize: 25.0 , fontWeight: FontWeight.bold),)
-                        ],
-                      ),
-                      new MemberProfile(),
-                    ]
-                )
+                      new Text(_textval ,style: new TextStyle(color: _textColor , fontSize: 25.0 , fontWeight: FontWeight.bold),)
+                    ],
+                  ),
+                  new ListView.builder(
+
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: members.length,
+                      itemBuilder: ( BuildContext context , int index ) {
+                        return new Card(
+                            child:  new MemberProfile(name: members[index],),
+
+
+                        );
+                      }
+                  )
+
+                ]
             )
         )
-
     );
   }
 }
