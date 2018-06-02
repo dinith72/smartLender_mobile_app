@@ -9,7 +9,7 @@ class loginController{
 //        result.forEach((row){
 //          print(row[1]);
 //        });
-        if(un == 'dj' && pw=='12'){
+        if(un == '' && pw==''){
           return true;
         }
         else  {

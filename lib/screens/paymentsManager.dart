@@ -3,6 +3,7 @@ import 'package:mobile_app/main.dart';
 import 'package:mobile_app/components/appBar.dart';
 import 'package:mobile_app/components/CustomDrawer.dart';
 import 'package:mobile_app/controller/PaymentManagerDataLoader.dart';
+import 'package:mobile_app/components/memberProfile.dart';
 
 class PaymentsManager extends StatefulWidget{
   @override
@@ -45,6 +46,7 @@ class _PaymentsManager extends State<PaymentsManager>{
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new CustomAppBar().getAppBar(context,'Payments Manager'),
+        drawer: new CustomDrawer().getDrawer(context),
         body: new Container(
             padding: new EdgeInsets.all(32.0),
             child: new Center(
@@ -52,9 +54,9 @@ class _PaymentsManager extends State<PaymentsManager>{
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       new TextField(
-                        decoration: new InputDecoration(
-                          hintText: "Please enter center"
-                        )),
+                          decoration: new InputDecoration(
+                              hintText: "Please enter center"
+                          )),
                       new DropdownButton(
                           value: _teamVal,
                           items: teams.map((String val){
@@ -72,17 +74,12 @@ class _PaymentsManager extends State<PaymentsManager>{
                           ),
                           new Text(_textval ,style: new TextStyle(color: _textColor , fontSize: 25.0 , fontWeight: FontWeight.bold),)
                         ],
-                      )
-
-
-
-//
-
+                      ),
+                      MemberProfile().getMemberProfile(),
                     ]
                 )
             )
-        ),
-        drawer: new CustomDrawer().getDrawer(context) ,
+        )
 
     );
   }

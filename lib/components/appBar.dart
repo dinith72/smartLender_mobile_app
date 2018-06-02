@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 class CustomAppBar {
 
   AppBar getAppBar(context , String title){
@@ -14,13 +15,19 @@ class CustomAppBar {
 //                color:  new Color.fromRGBO(232, 183, 25, 0.9),
                 child: new Row(
                   children: <Widget>[
-                    new Icon(Icons.people , color: Colors.white),
+//                    new ImageIcon(
+//                        new FileImage(new File("C:\Users\Dinith Jayabodhi\Downloads\profile_user.jpg"),{0.5})
+//                    ),
+
+//                    new Image.asset('/profile.png'),
                     new IconButton(
                         icon: new Icon(Icons.exit_to_app ,color: Colors.white),
                         onPressed: () {
                           Navigator.pushNamed(context, '/Login');
 
-                    }),
+                        }),
+
+
                   ],
                 )
             ),
