@@ -75,7 +75,7 @@ class _PaymentsManager extends State<PaymentsManager>{
                           new Text(_textval ,style: new TextStyle(color: _textColor , fontSize: 25.0 , fontWeight: FontWeight.bold),)
                         ],
                       ),
-                      MemberProfile().getMemberProfile(),
+                      new MemberProfile(),
                     ]
                 )
             )
