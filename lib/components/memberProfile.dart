@@ -25,15 +25,22 @@ class _MemberProfile extends State<MemberProfile>{
 
   Widget build(BuildContext context){
     return new Container(
+        margin: const EdgeInsets.symmetric(vertical: 10.0 , horizontal: 10.0),
         color: _conColor ,
         child:new Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
 
           children: <Widget>[
-//            new ImageIcon(
-//                new FileImage(  "C:\Users\Dinith Jayabodhi\Downloads\profile_user.jpg"))   ,
+            new Container(
+              child: new ImageIcon( new AssetImage('Images/new.png') , size:30.0 ) ,
+              margin: const EdgeInsets.symmetric(horizontal: 10.0 ,vertical: 5.0),
+              alignment: Alignment.center,
+            ) ,
+
+        //Image.asset('assets/Images/profile.png'))
+          // ,
             new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -42,9 +49,10 @@ class _MemberProfile extends State<MemberProfile>{
                       style : new TextStyle( fontSize:20.0 , fontWeight: FontWeight.w500 )
                   ),
                   new Container(
+                    margin: const EdgeInsets.symmetric(vertical: 3.0),
                     child: new SizedBox(
                         height: 20.0,
-                        width: 200.0,
+                        width: 150.0,
                         child: new LinearProgressIndicator(
                             value: _progressVal,
                             backgroundColor: new Color.fromRGBO(184, 234, 182, 0.2),
@@ -53,11 +61,14 @@ class _MemberProfile extends State<MemberProfile>{
                   )
 
                 ]),
-//            
-                new SelectIcon(
-                  selected: _selected, // values are passed to  the this.selected in Select icon component
-                  onClicked:(bool val) {_onIconSelected(val);},// onclicked method is called in the slect Icon component
-                ),
+               new Container(
+                 child: new SelectIcon(
+                   selected: _selected, // values are passed to  the this.selected in Select icon component
+                   onClicked:(bool val) {_onIconSelected(val);},// onclicked method is called in the slect Icon component
+                 ),
+                 alignment: Alignment.centerRight,
+               ) ,
+
 
 
           ],
