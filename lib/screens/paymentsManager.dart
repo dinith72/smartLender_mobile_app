@@ -4,6 +4,7 @@ import 'package:mobile_app/components/appBar.dart';
 import 'package:mobile_app/components/CustomDrawer.dart';
 import 'package:mobile_app/controller/PaymentManagerDataLoader.dart';
 import 'package:mobile_app/components/memberProfile.dart';
+import 'package:mobile_app/controller/Member.dart';
 
 class PaymentsManager extends StatefulWidget{
   @override
@@ -16,11 +17,11 @@ class _PaymentsManager extends State<PaymentsManager>{
   String _textval = "Collections";
   Color _textColor = Colors.green;
   List <String> teams = new List<String>();
-  List <String> members = new List<String>();
+  List <Member> memList = new List<Member>();
   String _teamVal ;
   void initState(){
     teams = PaymentManagerDataLoader().getTeams();
-    members = PaymentManagerDataLoader().getMembers();
+    memList = PaymentManagerDataLoader().getMembers();
     _teamVal = teams[0];
 
   }
@@ -106,10 +107,10 @@ class _PaymentsManager extends State<PaymentsManager>{
 
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: members.length,
+                      itemCount: memList.length,
                       itemBuilder: ( BuildContext context , int index ) {
                         return new Card(
-                            child:  new MemberProfile(name: members[index],),
+                            child:  new MemberProfile(member: memList[index],),
 
 
                         );

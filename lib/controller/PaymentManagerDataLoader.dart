@@ -1,3 +1,6 @@
+import 'package:mobile_app/controller/Member.dart';
+
+
 class PaymentManagerDataLoader{
 
   List<String> getTeams(){
@@ -7,10 +10,16 @@ class PaymentManagerDataLoader{
     return teams;
   }
 
-  List <String> getMembers(){
-    List<String> members = new List<String>();
-    members.addAll(['Dinith Jayabodhi', 'chamaka rajapakshe','wisura weerathunga','a','a','v']);
+  List <Member> getMembers(){
+    List<Member> memberList = new List<Member>();
+//    members.addAll(['Dinith Jayabodhi', 'chamaka rajapakshe','wisura weerathunga','a','a','v']);
 
-    return members;
+      Member member = new Member();
+      member.memName = 'dinith';
+      member.loanAmt =10000.0;
+      member.paidLoanAmt = 2500.0;
+      memberList.add(member);
+
+    return memberList;
   }
 }

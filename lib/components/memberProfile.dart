@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/components/selectIcon.dart';
+import 'package:mobile_app/controller/Member.dart';
 class MemberProfile extends StatefulWidget { // as the stste is changed the parent class also should extend from stateful widger
 
-  MemberProfile({Key key , this.name = ""}) : super(key: key);
+  MemberProfile({Key key , this.member = null}) : super(key: key);
   @override
   _MemberProfile createState() => new _MemberProfile();
-  final String name ;
+  final  Member member ;
 }
 class _MemberProfile extends State<MemberProfile>{
 
-//  String _memname = '' ;
-  double _progressVal = 0.5;
+
+  double _progressVal ;
   Color _conColor = new Color.fromRGBO(181,190 , 204, 0.5);
   bool _selected = false;
   String _nic = '';
@@ -31,6 +32,8 @@ class _MemberProfile extends State<MemberProfile>{
   }
 
   Widget build(BuildContext context){
+    Member mem = widget.member;
+    _progressVal = mem.paidLoanAmt/mem.loanAmt;
     return new Container(
 
         margin: const EdgeInsets.symmetric(vertical: 10.0 , horizontal: 7.0),
@@ -56,7 +59,7 @@ class _MemberProfile extends State<MemberProfile>{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Text(widget.name,
+                  new Text(mem.memName,
                       style : new TextStyle( fontSize:20.0 , fontWeight: FontWeight.w500 )
                   ),
                   new Container(
