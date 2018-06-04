@@ -3,6 +3,13 @@ class Member{
   double _loanAmt;
   double _paidLoanAmt;
   String _profPicUrl;
+  String _memNic;
+
+  String get memNic => _memNic;
+
+  set memNic(String value) {
+    _memNic = value;
+  }
 
   String get memName => _memName;
 

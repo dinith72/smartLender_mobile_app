@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/components/selectIcon.dart';
 import 'package:mobile_app/controller/Member.dart';
+import 'package:mobile_app/screens/paymentsManager.dart';
+
 class MemberProfile extends StatefulWidget { // as the stste is changed the parent class also should extend from stateful widger
 
-  MemberProfile({Key key , this.member = null}) : super(key: key);
+  MemberProfile({Key key , this.member = null  ,this.onRemoved, this.onClicked }) : super(key: key);
   @override
   _MemberProfile createState() => new _MemberProfile();
   final  Member member ;
+  final ValueChanged<String> onRemoved;
+  final ValueChanged<String> onClicked ;
 }
 class _MemberProfile extends State<MemberProfile>{
 
@@ -20,12 +24,15 @@ class _MemberProfile extends State<MemberProfile>{
 
 
   void _onIconSelected(bool val){ // state changed from the component is captures
+
     setState(() {
       _selected = val;
-      if(val){
+      if(_selected){
+        widget.onClicked(_nic);
         _conColor = new Color.fromRGBO(181,190 , 204, 1.0); // bg color is changed
       }
       else{
+        widget.onRemoved(_nic);
         _conColor = new Color.fromRGBO(181,190 , 204, 0.5);// bg color is changed
       }
     });
@@ -34,6 +41,8 @@ class _MemberProfile extends State<MemberProfile>{
   Widget build(BuildContext context){
     Member mem = widget.member;
     _progressVal = mem.paidLoanAmt/mem.loanAmt;
+    _nic = mem.memNic;
+
     return new Container(
 
         margin: const EdgeInsets.symmetric(vertical: 10.0 , horizontal: 7.0),

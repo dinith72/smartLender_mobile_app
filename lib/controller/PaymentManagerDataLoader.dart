@@ -18,7 +18,25 @@ class PaymentManagerDataLoader{
       member.memName = 'dinith';
       member.loanAmt =10000.0;
       member.paidLoanAmt = 2500.0;
+      member.memNic = '953280086v';
       memberList.add(member);
+
+    Member member1 = new Member();
+    member1.memName = 'dinith';
+    member1.loanAmt =10000.0;
+    member1.paidLoanAmt = 2500.0;
+    member1.memNic = '953280081v';
+    memberList.add(member1);
+
+    Member member2 = new Member();
+    member2.memName = 'dinith';
+    member2.loanAmt =10000.0;
+    member2.paidLoanAmt = 2500.0;
+    member2.memNic = '953280082v';
+    memberList.add(member2);
+
+
+
 
     return memberList;
   }

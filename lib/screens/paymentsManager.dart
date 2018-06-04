@@ -6,12 +6,18 @@ import 'package:mobile_app/controller/PaymentManagerDataLoader.dart';
 import 'package:mobile_app/components/memberProfile.dart';
 import 'package:mobile_app/controller/Member.dart';
 
+
 class PaymentsManager extends StatefulWidget{
   @override
   _PaymentsManager createState() => new _PaymentsManager();
+
+
+
 }
 
 class _PaymentsManager extends State<PaymentsManager>{
+
+  static List<String> selMem = new List<String>(); // stres all the nic numbers of the select member profiles
 
   bool _collecting = true;
   String _textval = "Collections";
@@ -19,11 +25,28 @@ class _PaymentsManager extends State<PaymentsManager>{
   List <String> teams = new List<String>();
   List <Member> memList = new List<Member>();
   String _teamVal ;
+
+  
   void initState(){
     teams = PaymentManagerDataLoader().getTeams();
     memList = PaymentManagerDataLoader().getMembers();
     _teamVal = teams[0];
 
+  }
+
+  void addButtonPressed(){
+    for(String s in selMem){
+      print(s);
+    }
+
+  }
+
+  void memberSelected(String nic){
+    selMem.add(nic);
+  }
+
+  void memberRemoved(String nic){
+    selMem.remove(nic);
   }
 
 
@@ -94,13 +117,39 @@ class _PaymentsManager extends State<PaymentsManager>{
 
                   ),
                   new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      new Switch(
-                          value: _collecting,
-                          onChanged: (bool val){switchPaymentOnClick(val);
-                          }
+                      new Container(
+                          child :new Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              new Switch(
+                                  value: _collecting,
+                                  onChanged: (bool val){switchPaymentOnClick(val);
+                                  }
+                              ),
+                              new Text(_textval ,style: new TextStyle(color: _textColor , fontSize: 20.0 , fontWeight: FontWeight.bold),),
+                            ],
+                          )
                       ),
-                      new Text(_textval ,style: new TextStyle(color: _textColor , fontSize: 25.0 , fontWeight: FontWeight.bold),)
+
+                      new Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                          alignment: Alignment.centerRight,
+                          child:new RaisedButton(
+                            onPressed:(){addButtonPressed();}, // for the button to become active method should be declared
+                            color: new Color.fromRGBO(204, 159, 14, 1.0),
+                            elevation: 4.0, // gives 3d effect to button
+
+                            child: new Text(
+                              "Add" ,
+                              style: new TextStyle( fontWeight: FontWeight.w700, color: Colors.white , fontSize: 20.0)
+                              ,),
+
+
+                          )
+                      )
+
                     ],
                   ),
                   new ListView.builder(
@@ -110,7 +159,11 @@ class _PaymentsManager extends State<PaymentsManager>{
                       itemCount: memList.length,
                       itemBuilder: ( BuildContext context , int index ) {
                         return new Card(
-                            child:  new MemberProfile(member: memList[index],),
+                          child:  new MemberProfile(
+                            member: memList[index],
+                            onClicked: (String nic){memberSelected(nic);},
+                            onRemoved: (String nic){memberRemoved(nic);},
+                          ),
 
 
                         );
