@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
 import 'package:mobile_app/components/appBar.dart';
 import 'package:mobile_app/components/CustomDrawer.dart';
-import 'package:mobile_app/controller/PaymentManagerDataLoader.dart';
+import 'package:mobile_app/controller/PaymentManagerDataloader.dart';
 import 'package:mobile_app/components/memberProfile.dart';
+import 'package:mobile_app/components/AddCollectionDialog.dart';
 import 'package:mobile_app/controller/Member.dart';
 
 
@@ -17,7 +18,7 @@ class PaymentsManager extends StatefulWidget{
 
 class _PaymentsManager extends State<PaymentsManager>{
 
-  static List<String> selMem = new List<String>(); // stres all the nic numbers of the select member profiles
+  List<String> selMem = new List<String>(); // stres all the nic numbers of the select member profiles
 
   bool _collecting = true;
   String _textval = "Collections";
@@ -26,7 +27,7 @@ class _PaymentsManager extends State<PaymentsManager>{
   List <Member> memList = new List<Member>();
   String _teamVal ;
 
-  
+
   void initState(){
     teams = PaymentManagerDataLoader().getTeams();
     memList = PaymentManagerDataLoader().getMembers();
@@ -34,12 +35,7 @@ class _PaymentsManager extends State<PaymentsManager>{
 
   }
 
-  void addButtonPressed(){
-    for(String s in selMem){
-      print(s);
-    }
 
-  }
 
   void memberSelected(String nic){
     selMem.add(nic);
@@ -174,5 +170,13 @@ class _PaymentsManager extends State<PaymentsManager>{
             )
         )
     );
+  }
+
+  Widget addButtonPressed(){
+
+    Widget alert = new  AddCollectionDialog( nic: selMem,);
+    showDialog(context: context , child: alert);
+    return alert;
+
   }
 }

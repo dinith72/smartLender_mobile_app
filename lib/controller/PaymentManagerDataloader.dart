@@ -34,10 +34,22 @@ class PaymentManagerDataLoader{
     member2.paidLoanAmt = 2500.0;
     member2.memNic = '953280082v';
     memberList.add(member2);
-
-
-
-
     return memberList;
   }
+
+  List<String> getPeriods(){
+    List<String> periods = new List<String>();
+    periods.addAll(['01' , '02' , '03' , '04']);
+    return periods;
+  }
+
+  bool sendCollectionDetials(List<String> nic , double amount, String period){
+    for(String s in nic){
+      print(s);
+    }
+    print(amount);
+    print(period);
+    return true;
+  }
+
 }
