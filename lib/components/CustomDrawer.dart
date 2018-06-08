@@ -36,10 +36,10 @@ class CustomDrawer{
                 new Container(
                     child:new FlatButton.icon(
 
-                      onPressed: (){Navigator.pushNamed(context, '/Payments');},
+                      onPressed: (){Navigator.pushNamed(context, '/MemberInfo');},
                       icon: new Icon(Icons.info , color: new Color.fromRGBO(204, 159, 14, 1.0), size: 35.0,),
                       label: new Text(
-                          'Customer Info' ,
+                          'Member Info' ,
                           style: new TextStyle( fontSize: 25.0 ,color: Colors.white, )
                       ) ,
                     ),

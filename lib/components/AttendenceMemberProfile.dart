@@ -18,7 +18,7 @@ class AttMemberProfile extends StatefulWidget {
 class _AttMemberProfile extends State<AttMemberProfile> {
 
   List<int> attDetails = [0 , 1 , 1 , 0 ];
-  List<Widget> attIcon = new List<Widget>();
+  List<Widget> attIcon = new List<Widget>(); // creating list which contain widgets
 
   Color _conColor = new Color.fromRGBO(181, 190, 204, 0.5);
   bool _selected = false;
@@ -27,18 +27,16 @@ class _AttMemberProfile extends State<AttMemberProfile> {
 
   @override
   void initState() {
-
+  // creating set of icons using a for loop
     for(int num in attDetails){
       Icon icn;
       if(num == 1){
         icn = new Icon( Icons.check_circle_outline , color: Colors.green, );
-
       }
       else {
         icn = new Icon(Icons.clear , color: Colors.red, );
       }
-//      attIcon.add(new Icon(icn));
-      attIcon.add(icn);
+      attIcon.add(icn); // adding all the icons to above mentioned list
 
     }
   }
@@ -99,7 +97,7 @@ class _AttMemberProfile extends State<AttMemberProfile> {
                           fontSize: 20.0, fontWeight: FontWeight.w500)
                   ),
                   new Row(
-                  children: attIcon,
+                  children: attIcon, // adding them to a row , similaryly an be added to another component
 
     ),
 //

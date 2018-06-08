@@ -9,7 +9,7 @@ class Login extends StatefulWidget{
 }
 
 class _Login extends State<Login>{
-  static final TextEditingController _user  = new TextEditingController();
+  static final TextEditingController _user  = new TextEditingController(); // the controller is declared as in here
   static final TextEditingController _pw = new TextEditingController();
 
   bool _switchVal = false;

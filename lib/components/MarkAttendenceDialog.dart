@@ -27,17 +27,17 @@ class _MarkAttendenceDialog extends State<MarkAttendenceDialog>{
   void initState() {
 
   }
-
+  // create future object to capture the date when entered
   Future<Null> selectDate(BuildContext context) async {
      final DateTime cal = await showDatePicker(
         context: context,
-        initialDate: _date,
-        firstDate: new DateTime(2014),
-        lastDate: new DateTime(2030),
+        initialDate: _date, // initial date
+        firstDate: new DateTime(2014), // earliest date you can pick
+        lastDate: new DateTime(2030), // latest date you can pick
     );
      if (cal != null && cal != _date)
        setState(() {
-         _date = cal;
+         _date = cal; // updating the state
 
        });
   }
@@ -95,9 +95,9 @@ class _MarkAttendenceDialog extends State<MarkAttendenceDialog>{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                      new Text(
-                        _date.toString().substring(0,10) ,
+                        _date.toString().substring(0,10) , // the date is didplyed in text field
                        style: new TextStyle( fontSize: 20.0 , color: Colors.blue),),
-                      new IconButton(
+                      new IconButton( // when this iscon is clicked future is excuted and date selection dialog appeas
                           icon: new Icon(Icons.calendar_today),
                           onPressed: (){selectDate(context);},
                           color: Colors.blue,
