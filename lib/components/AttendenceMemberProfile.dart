@@ -25,6 +25,24 @@ class _AttMemberProfile extends State<AttMemberProfile> {
   String _nic = '';
 
 
+  @override
+  void initState() {
+
+    for(int num in attDetails){
+      Icon icn;
+      if(num == 1){
+        icn = new Icon( Icons.check_circle_outline , color: Colors.green, );
+
+      }
+      else {
+        icn = new Icon(Icons.clear , color: Colors.red, );
+      }
+//      attIcon.add(new Icon(icn));
+      attIcon.add(icn);
+
+    }
+  }
+
   void _onIconSelected(bool val) {
     // state changed from the component is captures
 
@@ -46,20 +64,6 @@ class _AttMemberProfile extends State<AttMemberProfile> {
 
   Widget build(BuildContext context) {
     Member mem = widget.member;
-    int i =0 ;
-    for(int num in attDetails){
-      Icon icn;
-      if(num == 1){
-        icn = new Icon( Icons.check_circle_outline , color: Colors.green, );
-
-      }
-      else {
-        icn = new Icon(Icons.clear , color: Colors.red, );
-      }
-//      attIcon.add(new Icon(icn));
-      attIcon.add(icn);
-      i++;
-    }
     _nic = mem.memNic;
 
     return new Container(

@@ -5,6 +5,7 @@ import 'package:mobile_app/components/CustomDrawer.dart';
 import 'package:mobile_app/controller/Member.dart';
 import 'package:mobile_app/controller/PaymentManagerDataloader.dart';
 import 'package:mobile_app/components/AttendenceMemberProfile.dart';
+import 'package:mobile_app/components/MarkAttendenceDialog.dart';
 
 class Attendence extends StatefulWidget{
   @override
@@ -29,10 +30,21 @@ class _Attendence extends State<Attendence>{
   }
   Widget addButtonPressed(){
 
-//    Widget alert = new  AddCollectionDialog( nic: selMem,);
-//    showDialog(context: context , child: alert);
+    Widget alert = new  MarkAttendenceDialog(nic: selMem,);
+    showDialog(context: context , child: alert);
+    for(String s in selMem){
+      print(s);
+    }
     return null;
 
+  }
+
+  void memberSelected(String nic){
+    selMem.add(nic);
+  }
+
+  void memberRemoved(String nic){
+    selMem.remove(nic);
   }
 
 
@@ -121,8 +133,8 @@ class _Attendence extends State<Attendence>{
                         return new Card(
                           child:  new AttMemberProfile( // creating of the child component
                             member: memList[index],
-//                            onClicked: (String nic){memberSelected(nic);},
-//                            onRemoved: (String nic){memberRemoved(nic);}, // same goes with on removed
+                            onClicked: (String nic){memberSelected(nic);},
+                            onRemoved: (String nic){memberRemoved(nic);}, // same goes with on removed
                           ),
 
 
