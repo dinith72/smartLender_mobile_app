@@ -3,14 +3,17 @@ import 'package:mobile_app/components/selectIcon.dart';
 import 'package:mobile_app/controller/Member.dart';
 import 'package:mobile_app/screens/paymentsManager.dart';
 
-class MemberProfile extends StatefulWidget { // as the stste is changed the parent class also should extend from stateful widger
+class MemberProfile extends StatefulWidget {
 
-  MemberProfile({Key key , this.member = null  ,this.onRemoved, this.onClicked }) : super(key: key);
+  MemberProfile({Key key , this.member = null  ,this.onRemoved,this.onClicked }) : super(key: key);
   @override
   _MemberProfile createState() => new _MemberProfile();
+
+  // any value passed to the constructor has to declared in the below format
   final  Member member ;
   final ValueChanged<String> onRemoved;
   final ValueChanged<String> onClicked ;
+
 }
 class _MemberProfile extends State<MemberProfile>{
 

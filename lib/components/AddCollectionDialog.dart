@@ -49,7 +49,7 @@ class _AddCollectionDialog extends State<AddCollectionDialog>{
       content: new Container(
         child:
 
-        new Form(
+        new Form( // creates new form
             key: _key,
             child: new Column(
                 mainAxisSize: MainAxisSize.min,
@@ -58,7 +58,8 @@ class _AddCollectionDialog extends State<AddCollectionDialog>{
                   new TextFormField(
                     controller: _amount ,
                     decoration: new InputDecoration(labelText: "enter the amount here" ),
-                    validator: (String text){
+                    validator: (String text){ // we can set the validation on the text field itself
+                      // checks whether only nemeric is entered
                       try {
                         var val = double.parse(text);
                       }on FormatException{
@@ -74,9 +75,9 @@ class _AddCollectionDialog extends State<AddCollectionDialog>{
                       }).toList(),
                       onChanged: (String period){dropDownValueChanged(period);}),
 
-                  new RaisedButton(
+                  new RaisedButton( // this is the submit button
                       onPressed: (){
-                        if(_key.currentState.validate()){
+                        if(_key.currentState.validate()){  // validation is checked here
                           onSubmitClicked();
                         }
                       },

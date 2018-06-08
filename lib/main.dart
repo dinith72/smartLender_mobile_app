@@ -7,6 +7,7 @@ import 'package:mobile_app/components/CustomDrawer.dart';
 // imoprting screens
 import 'package:mobile_app/screens/login.dart';
 import 'package:mobile_app/screens/paymentsManager.dart';
+import 'package:mobile_app/screens/Attendence.dart';
 
 
 void main() => runApp(new MyApp());
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       '/Login' : (BuildContext context) => new Login(),
       '/Home' : (BuildContext context) => new MyHomePage(),
       '/Payments' : (BuildContext context) => new PaymentsManager(),
+      '/Attendence' : (BuildContext context) => new Attendence(),
     },
       home: new Login(),
     );

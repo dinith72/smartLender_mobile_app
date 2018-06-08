@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/main.dart';
-import 'package:mobile_app/components/appBar.dart';
+import  'package:mobile_app/components/appBar.dart';
 import 'package:mobile_app/components/CustomDrawer.dart';
-import 'package:mobile_app/controller/PaymentManagerDataloader.dart';
-import 'package:mobile_app/components/memberProfile.dart';
-import 'package:mobile_app/components/AddCollectionDialog.dart';
 import 'package:mobile_app/controller/Member.dart';
+import 'package:mobile_app/controller/PaymentManagerDataloader.dart';
+import 'package:mobile_app/components/AttendenceMemberProfile.dart';
 
-
-class PaymentsManager extends StatefulWidget{
+class Attendence extends StatefulWidget{
   @override
-  _PaymentsManager createState() => new _PaymentsManager();
-
-
-
+  _Attendence createState() => new _Attendence();
 }
 
-class _PaymentsManager extends State<PaymentsManager>{
-
+class _Attendence extends State<Attendence>{
   List<String> selMem = new List<String>(); // stres all the nic numbers of the select member profiles
 
   bool _collecting = true;
@@ -27,7 +21,6 @@ class _PaymentsManager extends State<PaymentsManager>{
   List <Member> memList = new List<Member>();
   String _teamVal ;
 
-
   void initState(){
     teams = PaymentManagerDataLoader().getTeams();
     memList = PaymentManagerDataLoader().getMembers();
@@ -36,46 +29,23 @@ class _PaymentsManager extends State<PaymentsManager>{
   }
   Widget addButtonPressed(){
 
-    Widget alert = new  AddCollectionDialog( nic: selMem,);
-    showDialog(context: context , child: alert);
-    return alert;
+//    Widget alert = new  AddCollectionDialog( nic: selMem,);
+//    showDialog(context: context , child: alert);
+    return null;
 
   }
 
 
-
-  void memberSelected(String nic){
-    selMem.add(nic);
-  }
-
-  void memberRemoved(String nic){
-    selMem.remove(nic);
-  }
-
-
-  switchPaymentOnClick(bool val){
-    setState(() {  // this method should be implemented in stateful widget
-      _collecting = val;
-      if(_collecting){
-        _textval = "Collecting";
-        _textColor = Colors.green;
-      }
-      else {
-        _textval = "Paying";
-        _textColor = Colors.red;
-      }
-    });
-  }
-  teamOnChanged(String team){
+  void teamOnChanged(String team){
     setState(() {
-      _teamVal = team;
+      _textval = team;
     });
-
-
   }
+
+
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new CustomAppBar().getAppBar(context,'Payments Manager'),
+        appBar: new CustomAppBar().getAppBar(context,'Attendence'),
         drawer: new CustomDrawer().getDrawer(context),
         body: new CustomScrollView(
           shrinkWrap: true,
@@ -120,21 +90,8 @@ class _PaymentsManager extends State<PaymentsManager>{
 
                   ),
                   new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      new Container(
-                          child :new Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              new Switch(
-                                  value: _collecting,
-                                  onChanged: (bool val){switchPaymentOnClick(val);
-                                  }
-                              ),
-                              new Text(_textval ,style: new TextStyle(color: _textColor , fontSize: 20.0 , fontWeight: FontWeight.bold),),
-                            ],
-                          )
-                      ),
 
                       new Container(
                           padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -145,7 +102,7 @@ class _PaymentsManager extends State<PaymentsManager>{
                             elevation: 4.0, // gives 3d effect to button
 
                             child: new Text(
-                              "Add" ,
+                              "Mark " ,
                               style: new TextStyle( fontWeight: FontWeight.w700, color: Colors.white , fontSize: 20.0)
                               ,),
 
@@ -162,13 +119,10 @@ class _PaymentsManager extends State<PaymentsManager>{
                       itemCount: memList.length,
                       itemBuilder: ( BuildContext context , int index ) {
                         return new Card(
-                          child:  new MemberProfile( // creating of the child component
-                            member: memList[index], // member object is passed to the memeber variable
-
-                           //below the on clicked methos is captures and we can set to excute set of instructions when on click methos is fired ,
-                           //notice that the parameter passed to on click method is capture in here
-                            onClicked: (String nic){memberSelected(nic);},
-                            onRemoved: (String nic){memberRemoved(nic);}, // same goes with on removed
+                          child:  new AttMemberProfile( // creating of the child component
+                            member: memList[index],
+//                            onClicked: (String nic){memberSelected(nic);},
+//                            onRemoved: (String nic){memberRemoved(nic);}, // same goes with on removed
                           ),
 
 
@@ -181,6 +135,4 @@ class _PaymentsManager extends State<PaymentsManager>{
         )
     );
   }
-
-
 }

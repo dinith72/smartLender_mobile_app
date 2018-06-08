@@ -61,7 +61,7 @@ class CustomDrawer{
                 new Container(
                   child:  new FlatButton.icon(
 
-                      onPressed: (){Navigator.pushNamed(context, '/Payments');},
+                      onPressed: (){Navigator.pushNamed(context, '/Attendence');},
                       icon: new Icon(Icons.people , color: new Color.fromRGBO(204, 159, 14, 1.0), size: 35.0,),
                       label: new Text(
                           'Attendence' ,
