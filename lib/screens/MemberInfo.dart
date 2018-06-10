@@ -4,6 +4,7 @@ import 'package:mobile_app/otherComponents/Entry.dart';
 import 'package:mobile_app/components/CustomDrawer.dart';
 import 'package:mobile_app/components/appBar.dart';
 import 'package:mobile_app/otherComponents/Images.dart';
+import 'package:mobile_app/controller/MemberInfoController.dart';
 //import 'package:app/main.dart';
 
 class MemberInfo extends StatefulWidget{
@@ -22,7 +23,7 @@ class _MemberInfo extends State<MemberInfo>{
 
   @override
   void initState() {
-    teams = ['team 1' , 'team 2' , 'team 3'];
+    teams = MemberInfoController().getTeams();
     _teamval = teams[0];
     mainCatagories =
     [
@@ -65,6 +66,9 @@ class _MemberInfo extends State<MemberInfo>{
     print(_center.text);
   }
 
+  void nicTextchanged() {
+    print(_nic.text);
+  }
   void dropdownSelected(String teamPicked){
     setState(() {
       _teamval = teamPicked;
@@ -111,11 +115,28 @@ class _MemberInfo extends State<MemberInfo>{
                               onChanged: (String teamPicked){dropdownSelected(teamPicked);}
                           ) ,
                         ),
+
                       ],
 
                     )  ,
                     Images().getImg('Images/person.png', 50.0, 50.0),
-                    
+                    new Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        new Flexible( // should be enclosed in Flexible unless exception is shown
+
+                          child: new TextField( // normal text field data
+                            controller: _nic ,
+                            decoration: new InputDecoration( hintText: 'enter nic here  ' , labelText: 'search by nic '),
+                            onChanged: (String txt){nicTextchanged();},
+                          ),
+
+                        ),
+                      ],
+                    ),
+
+
 
 //                     new DecoratedBox(
 //                        decoration: new BoxDecoration(
