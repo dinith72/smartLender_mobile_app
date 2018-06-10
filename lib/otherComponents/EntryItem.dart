@@ -16,7 +16,6 @@ class EntryItem extends StatelessWidget {
     return new ExpansionTile(
       key: new PageStorageKey<Entry>(root),
       title: new Text(root.title),
-
       children: root.children.map(_buildTiles).toList(),
     );
   }
