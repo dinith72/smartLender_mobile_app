@@ -15,7 +15,7 @@ class MemberInfo extends StatefulWidget{
 class _MemberInfo extends State<MemberInfo>{
   static final TextEditingController _center  = new TextEditingController();
   static final TextEditingController _nic  = new TextEditingController();
-  List<Entry> mainCatagories = new List<Entry>();
+  List<Entry> memberDetials = new List<Entry>();
   String _teamval ;
   List<String> teams = new List<String>();
 
@@ -25,40 +25,7 @@ class _MemberInfo extends State<MemberInfo>{
   void initState() {
     teams = MemberInfoController().getTeams();
     _teamval = teams[0];
-    mainCatagories =
-    [
-      new Entry(
-          "personal Info",
-          <Entry>[
-            new Entry('nic'),
-            new Entry('name'),
-            new Entry('date of birth'),
-            new Entry('contact num'),
-
-          ]
-      ),
-      new Entry(
-          'Loan Info',
-          <Entry>[
-            new Entry('joined date'),
-            new Entry('business'),
-
-
-          ]
-      ),
-      new Entry(
-          'Loan Payment Info',
-          <Entry>[
-            new Entry('Granted date'),
-            new Entry('Amount '),
-            new Entry( 'completion '),
-            new Entry('last payemnt  '),
-
-
-          ]
-      ),
-    ];
-
+    memberDetials = MemberInfoController().getMemberDetails();
 
   }
 
@@ -119,7 +86,11 @@ class _MemberInfo extends State<MemberInfo>{
                       ],
 
                     )  ,
-                    Images().getImg('Images/person.png', 50.0, 50.0),
+                    new Container(
+                      margin: new EdgeInsets.symmetric(vertical: 10.0 , horizontal: 10.0),
+                      child: Images().getImg('Images/person.png', 150.0, 150.0),
+                    ),
+
                     new Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -135,23 +106,12 @@ class _MemberInfo extends State<MemberInfo>{
                         ),
                       ],
                     ),
-
-
-
-//                     new DecoratedBox(
-//                        decoration: new BoxDecoration(
-//                          image: new DecorationImage(
-//                            image: new AssetImage('Images/new.png'),
-//                          ))),
-
-
-
                     ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount:mainCatagories.length ,
+                      itemCount:memberDetials.length ,
                       itemBuilder: (BuildContext context, int index){
-                        return EntryItem(mainCatagories[index]);
+                        return EntryItem(memberDetials[index]);
                       },
 
                     ) ,

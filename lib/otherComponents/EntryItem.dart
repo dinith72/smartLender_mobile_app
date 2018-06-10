@@ -6,10 +6,17 @@ class EntryItem extends StatelessWidget {
   final Entry entry;
 
   Widget _buildTiles(Entry root) {
-    if (root.children.isEmpty) return new ListTile(title: new Text(root.title));
+    if (root.children.isEmpty)
+      return new ListTile(
+          title: new Text(root.title),
+
+          subtitle: new Text(root.content),
+
+      );
     return new ExpansionTile(
       key: new PageStorageKey<Entry>(root),
       title: new Text(root.title),
+
       children: root.children.map(_buildTiles).toList(),
     );
   }
