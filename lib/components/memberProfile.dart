@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/components/selectIcon.dart';
 import 'package:mobile_app/controller/Member.dart';
 import 'package:mobile_app/screens/paymentsManager.dart';
+import'package:mobile_app/otherComponents/Images.dart';
 
 class MemberProfile extends StatefulWidget {
 
@@ -56,14 +57,15 @@ class _MemberProfile extends State<MemberProfile>{
           mainAxisSize: MainAxisSize.max,
 
           children: <Widget>[
-            new Container(
-              child: new ImageIcon(
-                  new ExactAssetImage('Images/new.png'  , scale: 0.75),
-//                  new AssetImage('Images/new.png') , 
-                  size:55.0 ) ,
-              margin: const EdgeInsets.symmetric(horizontal: 5.0 ,vertical: 5.0),
-              alignment: Alignment.center,
-            ) ,
+//            new Container(
+//              child: new ImageIcon(
+//                  new ExactAssetImage('Images/new.png'  , scale: 0.75),
+////                  new AssetImage('Images/new.png') ,
+//                  size:55.0 ) ,
+//              margin: const EdgeInsets.symmetric(horizontal: 5.0 ,vertical: 5.0),
+//              alignment: Alignment.center,
+//            ) ,
+            Images().getImg('Images/profile.png', 40.0, 40.0),
 
             //Image.asset('assets/Images/profile.png'))
             // ,

@@ -77,8 +77,9 @@ class _PaymentsManager extends State<PaymentsManager>{
     return new Scaffold(
         appBar: new CustomAppBar().getAppBar(context,'Payments Manager'),
         drawer: new CustomDrawer().getDrawer(context),
-        body: new CustomScrollView(
-          shrinkWrap: true,
+        // the following template must be followed to get scrollabel windoe
+        body: new CustomScrollView( // the scroallable effect are applied to body
+          shrinkWrap: true, // essential code , get infine hight error if not used
           slivers: <Widget>[
             new SliverPadding(
               padding: const EdgeInsets.all(0.0),
@@ -155,20 +156,19 @@ class _PaymentsManager extends State<PaymentsManager>{
 
                     ],
                   ),
-                  new ListView.builder(
+                  new ListView.builder( // create the list view
 
-                      shrinkWrap: true,
+                      shrinkWrap: true, // essential code , infinete hight is shown without this code
                       scrollDirection: Axis.vertical,
                       itemCount: memList.length,
                       itemBuilder: ( BuildContext context , int index ) {
                         return new Card(
-                          child:  new MemberProfile( // creating of the child component
-                            member: memList[index], // member object is passed to the memeber variable
+                          child:  new MemberProfile( // get items of member profile ( components ) recursively
+                            member: memList[index], //
 
-                           //below the on clicked methos is captures and we can set to excute set of instructions when on click methos is fired ,
-                           //notice that the parameter passed to on click method is capture in here
+
                             onClicked: (String nic){memberSelected(nic);},
-                            onRemoved: (String nic){memberRemoved(nic);}, // same goes with on removed
+                            onRemoved: (String nic){memberRemoved(nic);},
                           ),
 
 

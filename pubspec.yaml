@@ -26,7 +26,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-   - Images/new.png
+   - Images/person.png
    - Images/profile.png
    #- images/a_dot_ham.jpeg
 

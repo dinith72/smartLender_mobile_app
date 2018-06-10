@@ -3,6 +3,7 @@ import 'package:mobile_app/otherComponents/EntryItem.dart';
 import 'package:mobile_app/otherComponents/Entry.dart';
 import 'package:mobile_app/components/CustomDrawer.dart';
 import 'package:mobile_app/components/appBar.dart';
+import 'package:mobile_app/otherComponents/Images.dart';
 //import 'package:app/main.dart';
 
 class MemberInfo extends StatefulWidget{
@@ -89,13 +90,11 @@ class _MemberInfo extends State<MemberInfo>{
 
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
-
-
                       children: <Widget>[
 
-                        new Flexible(
+                        new Flexible( // should be enclosed in Flexible unless exception is shown
 
-                          child: new TextField(
+                          child: new TextField( // normal text field data
                             controller: _center ,
                             decoration: new InputDecoration( hintText: 'enter center name' , labelText: 'Center '),
                             onChanged: (String txt){centerTextChanged();},
@@ -115,12 +114,15 @@ class _MemberInfo extends State<MemberInfo>{
                       ],
 
                     )  ,
-                    new Container(
-                      child: new ImageIcon(
-                          new ExactAssetImage('Images/new.png'  , scale: 3.0),
-                          size:200.0 ) ,
-                      margin: const EdgeInsets.symmetric(horizontal: 5.0 ,vertical: 5.0),
-                      alignment: Alignment.center,),
+                    Images().getImg('Images/person.png', 50.0, 50.0),
+                    
+
+//                     new DecoratedBox(
+//                        decoration: new BoxDecoration(
+//                          image: new DecorationImage(
+//                            image: new AssetImage('Images/new.png'),
+//                          ))),
+
 
 
                     ListView.builder(
