@@ -4,13 +4,18 @@ import 'package:mobile_app/otherComponents/Entry.dart';
 class MemberInfoController {
 
   List<String> _teams = new List<String>();
+  List<Entry> _memberDetials = new List<Entry>();
+  String _attendence ;
+  String _repayemnt ;
+
+
+
+
+
   List<String> getTeams(){
     _teams = ['team 1' , 'team 2' , 'team 3' , 'teams4'];
     return _teams;
   }
-
-  List<Entry> _memberDetials = new List<Entry>();
-
   List<Entry> getMemberDetails(){
     _memberDetials =
     [
@@ -52,4 +57,14 @@ class MemberInfoController {
     return _memberDetials;
 
   }
+  String getRepayment(){
+    _repayemnt = '90%';
+    return _repayemnt;
+  }
+  String getAtendence(){
+    _attendence = '85%';
+    return _attendence;
+  }
+
+
 }

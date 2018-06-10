@@ -15,10 +15,11 @@ class MemberInfo extends StatefulWidget{
 class _MemberInfo extends State<MemberInfo>{
   static final TextEditingController _center  = new TextEditingController();
   static final TextEditingController _nic  = new TextEditingController();
-  List<Entry> memberDetials = new List<Entry>();
-  String _teamval ;
-  List<String> teams = new List<String>();
-
+  List<Entry> memberDetials = new List<Entry>(); // all the member details are shown in here
+  String _teamval ; // the selected team
+  List<String> teams = new List<String>(); // list of tems in the center
+  String _attendence = '' ;
+  String _repayement = '';
 
 
   @override
@@ -26,6 +27,9 @@ class _MemberInfo extends State<MemberInfo>{
     teams = MemberInfoController().getTeams();
     _teamval = teams[0];
     memberDetials = MemberInfoController().getMemberDetails();
+    _attendence = MemberInfoController().getAtendence();
+    _repayement = MemberInfoController().getRepayment();
+
 
   }
 
@@ -88,7 +92,28 @@ class _MemberInfo extends State<MemberInfo>{
                     )  ,
                     new Container(
                       margin: new EdgeInsets.symmetric(vertical: 10.0 , horizontal: 10.0),
-                      child: Images().getImg('Images/person.png', 150.0, 150.0),
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          new Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              new Text('Loan Payment', style: new TextStyle(color: Colors.amber, fontSize: 15.0 , fontWeight: FontWeight.w500), ) ,
+                              new Text(_repayement , style: new TextStyle(color: Colors.blue , fontSize: 30.0 ,),),
+                              new Text('Attendence' , style: new TextStyle(color: Colors.amber, fontSize: 15.0 , fontWeight: FontWeight.w500),),
+                              new Text(_attendence , style: new TextStyle(color: Colors.blue , fontSize: 30.0),),
+                            ],),
+
+                          Images().getImg('Images/person.png', 120.0, 120.0),
+                          Images().getImg('Images/leader.jpg', 60.0, 60.0),
+
+
+
+                        ],
+                      )
+
+
                     ),
 
                     new Row(
