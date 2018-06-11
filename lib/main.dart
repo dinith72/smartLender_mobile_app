@@ -11,6 +11,7 @@ import 'package:mobile_app/screens/paymentsManager.dart';
 import 'package:mobile_app/screens/Attendence.dart';
 import 'package:mobile_app/screens/MemberInfo.dart';
 import 'package:mobile_app/components/memberSelectionComponent.dart';
+import 'package:mobile_app/screens/Home.dart';
 
 
 void main() => runApp(new MyApp());
@@ -39,42 +40,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return new Scaffold(
-      appBar: new CustomAppBar().getAppBar(context,'Summary'),
-      body: new Center(
-
-        child: new Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(
-              'You have pushed the button this many times:',
-            ),
-
-          ],
-        ),
-      ),
-      drawer: new CustomDrawer().getDrawer(context),
-      
-//      This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
