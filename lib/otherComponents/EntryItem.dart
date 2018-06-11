@@ -8,12 +8,12 @@ class EntryItem extends StatelessWidget {
   Widget _buildTiles(Entry root) {
     if (root.children.isEmpty) // if there is no children the below component is returned
       return new ListTile(
-          title: new Text(root.title),
+          title: new Text(root.title), // the heading is returned in the title
 
-          subtitle: new Text(root.content),
+          subtitle: new Text(root.content), // the conent is returned in the subtitle
 
       );
-    return new ExpansionTile(
+    return new ExpansionTile( // if there is childeren that child is returned
       key: new PageStorageKey<Entry>(root),
       title: new Text(root.title),
       children: root.children.map(_buildTiles).toList(),

@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/components/appBar.dart';
 import 'package:mobile_app/components/CustomDrawer.dart';
 
+
 // imoprting screens
 import 'package:mobile_app/screens/login.dart';
 import 'package:mobile_app/screens/paymentsManager.dart';
 import 'package:mobile_app/screens/Attendence.dart';
 import 'package:mobile_app/screens/MemberInfo.dart';
+import 'package:mobile_app/components/memberSelectionComponent.dart';
 
 
 void main() => runApp(new MyApp());
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
       '/Payments' : (BuildContext context) => new PaymentsManager(),
       '/Attendence' : (BuildContext context) => new Attendence(),
       '/MemberInfo': (BuildContext context) => new MemberInfo(),
+      '/MemberSelection' : (BuildContext context) => new Selectioncomponent(),
     },
       home: new Login(),
     );

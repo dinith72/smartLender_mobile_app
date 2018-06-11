@@ -8,6 +8,7 @@ import 'package:mobile_app/controller/MemberInfoController.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mobile_app/components/alertWindow.dart';
 import 'package:mobile_app/controller/Member.dart';
+import 'dart:async';
 //import 'package:app/main.dart';
 
 
@@ -66,7 +67,12 @@ class _MemberInfo extends State<MemberInfo>{
     List<Member> mem = MemberInfoController().getMemberSearchDetails(_nic.text);
   AlertDialog dialog = alertWindow().selectionDialog(context, mem) ;
   showDialog(context: context,child: dialog);
+  Navigator.pushNamed(context, '/MemberSelection');
   }
+
+
+
+
   _MemberInfo() {
     seachbar = new SearchBar(
         inBar: false,
@@ -204,27 +210,13 @@ key: _scaffoldKey,
 
                     ),
 
-                    new Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Flexible( // should be enclosed in Flexible unless exception is shown
 
-                          child: new TextField( // normal text field data
-                            controller: _nic ,
-                            decoration: new InputDecoration( hintText: 'enter nic here  ' , labelText: 'search by nic '),
-                            onChanged: (String txt){nicTextchanged();},
-                          ),
-
-                        ),
-                      ],
-                    ),
-                    ListView.builder(
+                    ListView.builder( // create a new list view
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount:memberDetials.length ,
+                      itemCount:memberDetials.length , // the item count is mentioned in here
                       itemBuilder: (BuildContext context, int index){
-                        return EntryItem(memberDetials[index]);
+                        return EntryItem(memberDetials[index]); // new entry item is retruned
                       },
 
                     ) ,
