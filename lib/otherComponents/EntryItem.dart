@@ -6,7 +6,7 @@ class EntryItem extends StatelessWidget {
   final Entry entry;
 
   Widget _buildTiles(Entry root) {
-    if (root.children.isEmpty)
+    if (root.children.isEmpty) // if there is no children the below component is returned
       return new ListTile(
           title: new Text(root.title),
 

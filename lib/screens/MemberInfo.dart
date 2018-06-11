@@ -7,6 +7,7 @@ import 'package:mobile_app/otherComponents/Images.dart';
 import 'package:mobile_app/controller/MemberInfoController.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mobile_app/components/alertWindow.dart';
+import 'package:mobile_app/controller/Member.dart';
 //import 'package:app/main.dart';
 
 
@@ -59,11 +60,11 @@ class _MemberInfo extends State<MemberInfo>{
         backgroundColor: new Color.fromRGBO(204, 159, 14, 1.0),
         actions: [seachbar.getSearchAction(context)]);
   }
-
+// get the value when search bar is clicked
   void onSubmitted(String value) {
-//    setState(() => _scaffoldKey.currentState
-//        .showSnackBar(new SnackBar(content: new Text('You wrote $value!'))));
-  AlertDialog dialog = alertWindow().WarningWindow(context) ;
+
+    List<Member> mem = MemberInfoController().getMemberSearchDetails(_nic.text);
+  AlertDialog dialog = alertWindow().selectionDialog(context, mem) ;
   showDialog(context: context,child: dialog);
   }
   _MemberInfo() {
@@ -84,8 +85,9 @@ class _MemberInfo extends State<MemberInfo>{
 
   void nicTextchanged() {
     print(_nic.text);
-    AlertDialog alert = alertWindow().WarningWindow(context) ;
-    showDialog(context: context,child: alert);
+
+//    AlertDialog alert = alertWindow().selectionDialog(context) ;
+//    showDialog(context: context,child: alert);
   }
   void dropdownSelected(String teamPicked){
     setState(() {

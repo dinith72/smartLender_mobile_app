@@ -1,5 +1,6 @@
 import 'package:mobile_app/otherComponents/EntryItem.dart';
 import 'package:mobile_app/otherComponents/Entry.dart';
+import 'package:mobile_app/controller/Member.dart';
 
 class MemberInfoController {
 
@@ -74,6 +75,29 @@ class MemberInfoController {
   String getAtendence(){
     _attendence = '85%';
     return _attendence;
+  }
+
+  List<Member> getMemberSearchDetails(String nic){
+    List<Member> memList = new List<Member>();
+    Member mem = new Member();
+    mem.memNic = '953280086v';
+    mem.memName = 'dinith';
+    Member mem1 = new Member();
+    mem1.memNic = '953280087v';
+    mem1.memName = 'chamaka';
+    Member mem2 = new Member();
+    mem2.memNic = '953280088v';
+    mem2.memName = 'wisura';
+    Member mem3 = new Member();
+    mem3.memNic = '953280080v';
+    mem3.memName = 'chathura';
+
+    memList.add(mem);
+    memList.add(mem1);
+    memList.add(mem2);
+    memList.add(mem3);
+    return memList;
+
   }
 
 
