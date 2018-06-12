@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:mobile_app/controller/AttendenceController.dart';
+import 'package:date_format/date_format.dart';
+
 //import 'package:flutter/D';
 
 
@@ -95,8 +97,10 @@ class _MarkAttendenceDialog extends State<MarkAttendenceDialog>{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                      new Text(
-                        _date.toString().substring(0,10) , // the date is didplyed in text field
-                       style: new TextStyle( fontSize: 20.0 , color: Colors.blue),),
+                        formatDate(_date,  [M, '-', d]) , // the date is didplyed in text field
+                       style: new TextStyle( fontSize: 20.0 , color: Colors.blue),
+
+                     ),
                       new IconButton( // when this iscon is clicked future is excuted and date selection dialog appeas
                           icon: new Icon(Icons.calendar_today),
                           onPressed: (){selectDate(context);},

@@ -57,21 +57,18 @@ class _MemberProfile extends State<MemberProfile>{
           mainAxisSize: MainAxisSize.max,
 
           children: <Widget>[
-//            new Container(
-//              child: new ImageIcon(
-//                  new ExactAssetImage('Images/new.png'  , scale: 0.75),
-////                  new AssetImage('Images/new.png') ,
-//                  size:55.0 ) ,
-//              margin: const EdgeInsets.symmetric(horizontal: 5.0 ,vertical: 5.0),
-//              alignment: Alignment.center,
-//            ) ,
-            Images().getImg('Images/profile.png', 40.0, 40.0),
+            new Container(
+              padding: new EdgeInsets.symmetric(horizontal: 15.0),
+              child: Images().getImg('Images/profile.png', 40.0, 40.0),
+            ) ,
+
 
             //Image.asset('assets/Images/profile.png'))
             // ,
             new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
+
                 children: <Widget>[
                   new Text(mem.memName,
                       style : new TextStyle( fontSize:20.0 , fontWeight: FontWeight.w500 )
@@ -83,7 +80,7 @@ class _MemberProfile extends State<MemberProfile>{
                         width: 150.0,
                         child: new LinearProgressIndicator(
                             value: _progressVal,
-                            backgroundColor: new Color.fromRGBO(184, 234, 182, 0.2),
+                            backgroundColor: new Color.fromRGBO(115, 219, 59, 0.4),
                             valueColor: new AlwaysStoppedAnimation<Color>(Colors.green))
                     ),
                   )
