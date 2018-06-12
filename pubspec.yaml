@@ -10,7 +10,7 @@ dependencies:
   cupertino_icons: ^0.1.0
   #sqljocky5: "^1.0.0"
   flutter_search_bar: "^2.0.3"
-  loader_search_bar: "^0.0.2+3"
+  date_format: "^1.0.4"
 
 dev_dependencies:
   flutter_test:

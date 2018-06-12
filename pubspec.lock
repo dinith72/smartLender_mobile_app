@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
+  date_format:
+    dependency: "direct main"
+    description:
+      name: date_format
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -151,13 +158,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0-alpha.12"
-  loader_search_bar:
-    dependency: "direct main"
-    description:
-      name: loader_search_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2+3"
   logging:
     dependency: transitive
     description:

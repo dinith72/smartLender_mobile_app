@@ -17,6 +17,11 @@ class _CenterWidget extends State<CenterWidget>{
   double _attendence = 0.0;
   @override
   void initState() {
+
+  }
+
+
+  Widget build(BuildContext context) {
     if(widget.centerInfo.name != ""){
       _name = widget.centerInfo.name;
     }
@@ -29,10 +34,6 @@ class _CenterWidget extends State<CenterWidget>{
     if(widget.centerInfo.attendemce != null){
       _attendence = widget.centerInfo.attendemce;
     }
-  }
-
-
-  Widget build(BuildContext context) {
     return new Container(
 
 
