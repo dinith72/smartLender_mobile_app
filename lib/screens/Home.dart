@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String _date = 'Today';
   double _colAmnt = 0.0 ;
   double _payAmnt = 0.0 ;
-  Color _color = new Color.fromRGBO(204, 159, 14, 1.0); // the texxt and the card color
+  Color _color = new Color.fromRGBO(211, 191, 139,1.0) ; // the texxt and the card color
   List<CenterInfo> centerList = new List<CenterInfo>();
 
 
@@ -85,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             new Card(
                               margin: new EdgeInsets.symmetric(vertical: 10.0 , horizontal: 5.0),
                               color: _color,
+
                               child: new Column(
                                 children: <Widget>[
                                   new Text('Collections' , style: new TextStyle(fontSize: 40.0 , color: Colors.white, fontWeight: FontWeight.w700),),

@@ -14,7 +14,7 @@ import 'package:mobile_app/components/memberSelectionComponent.dart';
 import 'package:mobile_app/screens/Home.dart';
 
 
-void main() => runApp(new MyApp());
+void  main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

@@ -5,6 +5,7 @@ class Member{
   String _profPicUrl;
   String _memNic;
 
+
   String get memNic => _memNic;
 
   set memNic(String value) {
