@@ -20,7 +20,7 @@ class _MemberProfile extends State<MemberProfile>{
 
 
   double _progressVal ;
-  Color _conColor = new Color.fromRGBO(181,190 , 204, 0.5);
+  Color _conColor = new Color.fromRGBO(147, 214, 202, 0.5);
   bool _selected = false;
   String _nic = '';
 
@@ -33,11 +33,11 @@ class _MemberProfile extends State<MemberProfile>{
       _selected = val;
       if(_selected){
         widget.onClicked(_nic);
-        _conColor = new Color.fromRGBO(181,190 , 204, 1.0); // bg color is changed
+        _conColor = new Color.fromRGBO(129, 226, 209, 1.0); // bg color is changed
       }
       else{
         widget.onRemoved(_nic);
-        _conColor = new Color.fromRGBO(181,190 , 204, 0.5);// bg color is changed
+        _conColor = new Color.fromRGBO(147, 214, 202, 0.5);// bg color is changed
       }
     });
   }
@@ -48,8 +48,8 @@ class _MemberProfile extends State<MemberProfile>{
     _nic = mem.memNic;
 
     return new Container(
-
-        margin: const EdgeInsets.symmetric(vertical: 10.0 , horizontal: 7.0),
+        padding: new EdgeInsets.symmetric(vertical: 10.0),
+        margin: const EdgeInsets.symmetric(vertical: 5.0 , horizontal: 7.0),
         color: _conColor ,
         child:new Row(
           crossAxisAlignment: CrossAxisAlignment.center,

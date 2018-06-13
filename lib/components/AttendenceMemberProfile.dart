@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/components/selectIcon.dart';
 import 'package:mobile_app/controller/Member.dart';
+import 'package:mobile_app/otherComponents/Images.dart';
 import 'package:mobile_app/screens/paymentsManager.dart';
 
 class AttMemberProfile extends StatefulWidget {
@@ -20,7 +21,7 @@ class _AttMemberProfile extends State<AttMemberProfile> {
   List<int> attDetails = [0 , 1 , 1 , 0 ];
   List<Widget> attIcon = new List<Widget>(); // creating list which contain widgets
 
-  Color _conColor = new Color.fromRGBO(181, 190, 204, 0.5);
+  Color _conColor = new Color.fromRGBO(147, 214, 202, 0.5);
   bool _selected = false;
   String _nic = '';
 
@@ -49,12 +50,12 @@ class _AttMemberProfile extends State<AttMemberProfile> {
       if (_selected) {
         widget.onClicked(_nic);
         _conColor =
-        new Color.fromRGBO(181, 190, 204, 1.0); // bg color is changed
+        new Color.fromRGBO(129, 226, 209, 1.0); // bg color is changed
       }
       else {
         widget.onRemoved(_nic);
         _conColor =
-        new Color.fromRGBO(181, 190, 204, 0.5); // bg color is changed
+        new Color.fromRGBO(147, 214, 202, 0.5); // bg color is changed
       }
     });
   }
@@ -65,24 +66,25 @@ class _AttMemberProfile extends State<AttMemberProfile> {
     _nic = mem.memNic;
 
     return new Container(
-
-        margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 7.0),
+        padding: new EdgeInsets.symmetric(vertical: 10.0 , horizontal: 5.0),
+        margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 7.0),
         color: _conColor,
         child: new Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,
 
           children: <Widget>[
-            new Container(
-              child: new ImageIcon(
-                  new ExactAssetImage('Images/new.png', scale: 0.75),
-//                  new AssetImage('Images/new.png') ,
-                  size: 55.0),
-              margin: const EdgeInsets.symmetric(
-                  horizontal: 5.0, vertical: 5.0),
-              alignment: Alignment.center,
-            ),
+//            new Container(
+//              child: new ImageIcon(
+//                  new ExactAssetImage('Images/profile.png', scale: 0.75),
+////                  new AssetImage('Images/new.png') ,
+//                  size: 55.0),
+//              margin: const EdgeInsets.symmetric(
+//                  horizontal: 5.0, vertical: 5.0),
+//              alignment: Alignment.center,
+//            ),
+          Images().getImg('Images/profile.png', 50.0, 50.0)   ,
 
             //Image.asset('assets/Images/profile.png'))
             // ,

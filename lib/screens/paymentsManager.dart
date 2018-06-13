@@ -164,7 +164,7 @@ class _PaymentsManager extends State<PaymentsManager>{
                             ],
                           )
                       ),
-                      
+
                       getAddButton(),
                     ],
 

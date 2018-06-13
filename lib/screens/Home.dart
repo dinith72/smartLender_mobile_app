@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String strDate = '';
   double _colAmnt = 0.0 ;
   double _payAmnt = 0.0 ;
-  Color _color = new Color.fromRGBO(211, 191, 139,1.0) ; // the texxt and the card color
+  Color _color = new Color.fromRGBO(118,162,237,1.0) ; // the texxt and the card color
   List<CenterInfo> centerList = new List<CenterInfo>();
 
   @override
@@ -118,8 +118,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child:new Column(
 
                                   children: <Widget>[
-                                    new Text('Collections' , style: new TextStyle(fontSize: 40.0 , color: Colors.green, fontWeight: FontWeight.w700),),
-                                    new Text(_colAmnt.toString() , style: new TextStyle(fontSize: 40.0 , color: Colors.green, fontWeight: FontWeight.w700),),
+                                    new Text('Collections' , style: new TextStyle(fontSize: 40.0 , color: new Color.fromRGBO(197, 239, 141, 1.0), fontWeight: FontWeight.w700),),
+                                    new Text(_colAmnt.toString() , style: new TextStyle(fontSize: 40.0 , color: new Color.fromRGBO(197, 239, 141, 1.0), fontWeight: FontWeight.w700),),
                                     new Text('Payments' , style: new TextStyle(fontSize: 40.0 ,color: new Color.fromRGBO(158, 3, 41, 1.0), fontWeight: FontWeight.w700),),
                                     new Text(_payAmnt.toString() , style: new TextStyle(fontSize: 40.0 , color: new Color.fromRGBO(158, 3, 41, 1.0), fontWeight: FontWeight.w700),)
                                   ],
