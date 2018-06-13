@@ -7,6 +7,8 @@ import 'package:mobile_app/components/memberProfile.dart';
 import 'package:mobile_app/components/AddCollectionDialog.dart';
 import 'package:mobile_app/controller/Member.dart';
 import 'package:mobile_app/components/MemberProfileSigleMode.dart';
+import 'package:date_format/date_format.dart';
+import 'dart:async';
 
 
 class PaymentsManager extends StatefulWidget{
@@ -28,13 +30,28 @@ class _PaymentsManager extends State<PaymentsManager>{
   List <Member> memList = new List<Member>();
   String _teamVal ;
   bool _batchMode = true;
+  DateTime _date= null;
 
 
   void initState(){
     teams = PaymentManagerDataLoader().getTeams();
     memList = PaymentManagerDataLoader().getMembers();
     _teamVal = teams[0];
+    _date = DateTime.now();
 
+  }
+  Future<Null> selectDate(BuildContext context) async {
+    final DateTime cal = await showDatePicker(
+      context: context,
+      initialDate: _date, // initial date
+      firstDate: new DateTime(2014), // earliest date you can pick
+      lastDate: new DateTime(2030), // latest date you can pick
+    );
+    if (cal != null && cal != _date)
+      setState(() {
+        _date = cal; // updating the state
+
+      });
   }
 
   void batchModeToggle(bool value){
@@ -83,28 +100,28 @@ class _PaymentsManager extends State<PaymentsManager>{
   }
   Widget build(BuildContext context) {
 
-      return new Scaffold(
-          appBar: new CustomAppBar().getAppBar(context, 'Payments Manager'),
-          drawer: new CustomDrawer().getDrawer(context),
-          // the following template must be followed to get scrollabel windoe
-          body: new CustomScrollView( // the scroallable effect are applied to body
-            shrinkWrap: true,
-            // essential code , get infine hight error if not used
-            slivers: <Widget>[
-              new SliverPadding(
-                padding: const EdgeInsets.all(0.0),
-                sliver: new SliverList(
-                  delegate: new SliverChildListDelegate(
-                    <Widget>[
-                      _getComponents()
+    return new Scaffold(
+        appBar: new CustomAppBar().getAppBar(context, 'Payments Manager'),
+        drawer: new CustomDrawer().getDrawer(context),
+        // the following template must be followed to get scrollabel windoe
+        body: new CustomScrollView( // the scroallable effect are applied to body
+          shrinkWrap: true,
+          // essential code , get infine hight error if not used
+          slivers: <Widget>[
+            new SliverPadding(
+              padding: const EdgeInsets.all(0.0),
+              sliver: new SliverList(
+                delegate: new SliverChildListDelegate(
+                  <Widget>[
+                    _getComponents()
 
-                    ],
-                  ),
+                  ],
                 ),
               ),
-            ],
-          )
-      );
+            ),
+          ],
+        )
+    );
 
 
   }
@@ -147,60 +164,19 @@ class _PaymentsManager extends State<PaymentsManager>{
                             ],
                           )
                       ),
-
-
-
-
-                      new Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                          alignment: Alignment.centerRight,
-                          child:new RaisedButton(
-                            onPressed:(){addButtonPressed();}, // for the button to become active method should be declared
-                            color: new Color.fromRGBO(204, 159, 14, 1.0),
-                            elevation: 4.0, // gives 3d effect to button
-
-                            child: new Text(
-                              "Add" ,
-                              style: new TextStyle( fontWeight: FontWeight.w700, color: Colors.white , fontSize: 20.0)
-                              ,),
-
-
-                          )
-                      )
-                    
-                    
-
+                      
+                      getAddButton(),
                     ],
 
                   ),
                   new  SwitchListTile(
-                        value: _batchMode,
-                        onChanged: (bool value){batchModeToggle(value);},
-                        title: new Text('Batch mode'),
-                      ),
+                    value: _batchMode,
+                    onChanged: (bool value){batchModeToggle(value);},
+                    title: new Text('Batch mode'),
+                  ),
 
                   getMemberCard(),
-//                  new ListView.builder( // create the list view
 //
-//                      shrinkWrap: true, // essential code , infinete hight is shown without this code
-//                      scrollDirection: Axis.vertical,
-//                      itemCount: memList.length,
-//                      itemBuilder: ( BuildContext context , int index ) {
-//                        return new Card(
-//                          child:  new MemberProfile( // get items of member profile ( components ) recursively
-//                            member: memList[index], //
-//
-//
-//                            onClicked: (String nic){memberSelected(nic);},
-//                            onRemoved: (String nic){memberRemoved(nic);},
-//                          ),
-//
-//
-//                        );
-////                          getMemberCard(index);
-//                      }
-//                  )
-
                 ]
             )
         )
@@ -229,7 +205,7 @@ class _PaymentsManager extends State<PaymentsManager>{
           }
       );
     }
-      else{
+    else{
       return new ListView.builder( // create the list view
 
           shrinkWrap: true, // essential code , infinete hight is shown without this code
@@ -237,9 +213,9 @@ class _PaymentsManager extends State<PaymentsManager>{
           itemCount: memList.length,
           itemBuilder: ( BuildContext context , int index ) {
             return new Card(
-              child:  new MemberProfileSingleMode(
-                member: memList[index],
-              )
+                child:  new MemberProfileSingleMode(
+                  member: memList[index],
+                )
 
 
             );
@@ -249,6 +225,45 @@ class _PaymentsManager extends State<PaymentsManager>{
 
     }
 
+  }
+
+  Widget getAddButton(){
+    if(_batchMode){
+      return new Container(
+          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+          alignment: Alignment.centerRight,
+          child:new RaisedButton(
+            onPressed:(){addButtonPressed();}, // for the button to become active method should be declared
+            color: new Color.fromRGBO(204, 159, 14, 1.0),
+            elevation: 4.0, // gives 3d effect to button
+
+            child: new Text(
+              "Add" ,
+              style: new TextStyle( fontWeight: FontWeight.w700, color: Colors.white , fontSize: 20.0)
+              ,),
+
+
+          )
+      );
+    }
+    else {
+      return new Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          new Text(
+            formatDate(_date,  [M, '-', d]) , // the date is didplyed in text field
+            style: new TextStyle( fontSize: 20.0 , color: Colors.blue),
+
+          ),
+          new IconButton( // when this iscon is clicked future is excuted and date selection dialog appeas
+            icon: new Icon(Icons.calendar_today),
+            onPressed: (){selectDate(context);},
+            color: Colors.blue,
+          )
+        ],
+      );
+
+    }
   }
 
 }

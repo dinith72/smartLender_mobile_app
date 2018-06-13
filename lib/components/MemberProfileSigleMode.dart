@@ -6,29 +6,31 @@ import'package:mobile_app/otherComponents/Images.dart';
 import 'package:mobile_app/controller/PaymentManagerDataloader.dart';
 
 
-final TextEditingController _amount  = new TextEditingController();
+//final TextEditingController _amount  = new TextEditingController();
 final GlobalKey<FormState> _key = new GlobalKey<FormState>();
 class MemberProfileSingleMode extends StatefulWidget {
 
-  MemberProfileSingleMode({Key key , this.member = null  ,this.onRemoved,this.onClicked }) : super(key: key);
+  MemberProfileSingleMode({Key key , this.member = null  ,this.onRemoved,this.onSubmit }) : super(key: key);
   @override
   _MemberProfileSigleMode createState() => new _MemberProfileSigleMode();
 
   // any value passed to the constructor has to declared in the below format
   final  Member member ;
   final ValueChanged<String> onRemoved;
-  final ValueChanged<String> onClicked ;
+  final ValueChanged<String> onSubmit ;
 
 }
 class _MemberProfileSigleMode extends State<MemberProfileSingleMode>{
 
-
+  final TextEditingController _amount = new TextEditingController();
   double _progressVal ;
   Color _conColor = new Color.fromRGBO(181,190 , 204, 0.5);
   bool _selected = false;
   String _nic = '';
   List<String> periods = new List<String>();
   String _selPeriod = '';
+  bool _activeAddBtn = true;
+  bool _activePrintBtn = false;
 
 
   @override
@@ -38,12 +40,23 @@ class _MemberProfileSigleMode extends State<MemberProfileSingleMode>{
   }
   void onSubmitClicked(){
     double amt = double.parse(_amount.text) ;
-//    bool status = PaymentManagerDataLoader().sendCollectionDetials(_nic, amt, _selPeriod);
+    bool status = PaymentManagerDataLoader().sendSingleCollectionDetials(_nic, amt, _selPeriod);
+    if(status){
+      setState(() {
+        _activeAddBtn = false;
+        _activePrintBtn = true ;
+      });
+    }
+
 
 
   }
   void printclcked(){
     print('print');
+    setState(() {
+      _activePrintBtn = false ;
+    });
+
   }
 
 //  void _onIconSelected(bool val){ // state changed from the component is captures
@@ -112,105 +125,96 @@ class _MemberProfileSigleMode extends State<MemberProfileSingleMode>{
                       )
 
                     ]),
-//                new Container(
-//                  child: new SelectIcon(
-//                    selected: _selected, // values are passed to  the this.selected in Select icon component
-//                    onClicked:(bool val) {_onIconSelected(val);},// onclicked method is called in the slect Icon component
-//                  ),
-//                  alignment: Alignment.centerRight,
-//                ) ,
+//
               ],
             ),
-             new Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
+            new Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+
+
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+
                     children: <Widget>[
 
+                      new Flexible(
 
-                      new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-                        children: <Widget>[
-
-                          new Flexible(
-
-                            child: new TextFormField(
-                              controller: _amount ,
-                              decoration: new InputDecoration(labelText: "enter amount" ),
-                              validator: (String text){ // we can set the validation on the text field itself
-                                // checks whether only nemeric is entered
-                                try {
-                                  var val = double.parse(text);
-                                }on FormatException{
-                                  return 'Incorrect input';
-                                }
-                              },
-                            ),
-                          ) ,
-                          new Container(
-                          margin: new EdgeInsets.symmetric(horizontal: 10.0),
-                          child:new DropdownButton(
-                              elevation: 3,
-                              value: _selPeriod,
-                              items: periods.map((String period){
-                                return new DropdownMenuItem(child: new Text(period) , value: period,);
-                              }).toList(),
-                              onChanged: (String period){dropDownValueChanged(period);}
-                          ) ,
-                          ),
-
-
-
-                        ],
+                        child: new TextFormField(
+                          controller: _amount ,
+                          decoration: new InputDecoration(labelText: "enter amount" ),
+                          validator: (String text){ // we can set the validation on the text field itself
+                            // checks whether only nemeric is entered
+                            try {
+                              var val = double.parse(text);
+                            }on FormatException{
+                              return 'Incorrect input';
+                            }
+                          },
+                        ),
+                      ) ,
+                      new Container(
+                        margin: new EdgeInsets.symmetric(horizontal: 10.0),
+                        child:new DropdownButton(
+                            elevation: 3,
+                            value: _selPeriod,
+                            items: periods.map((String period){
+                              return new DropdownMenuItem(child: new Text(period) , value: period,);
+                            }).toList(),
+                            onChanged: (String period){dropDownValueChanged(period);}
+                        ) ,
                       ),
 
 
-                      new Container(
-                        margin: new EdgeInsets.symmetric(vertical: 10.0),
-                        child: new Row(
-                          mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            new RaisedButton( // this is the submit button
-                              onPressed: (){
-                                if(_key.currentState.validate()){  // validation is checked here
-                                  onSubmitClicked();
-                                }
-                              },
-                              elevation: 4.0,
-                              color: Colors.green,
-                              child: new Text(
-                                'Add' ,
-                                style: new TextStyle( fontWeight: FontWeight.w500 , fontSize: 20.0 , color: Colors.white ),
-                              ),
-                            ),
-                          new FlatButton.icon(
-                            icon: new Icon(Icons.print , size: 30.0, color: Colors.white,),
-                            onPressed: (){printclcked();},
-                            color: Colors.blue,
-                            label: new Text('print' , style: new TextStyle(color: Colors.white , fontSize: 15.0),),
-                            disabledColor: Colors.black12,
 
-                          )
-                          ],
+                    ],
+                  ),
+
+
+                  new Container(
+                    margin: new EdgeInsets.symmetric(vertical: 10.0),
+                    child: new Row(
+                      mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        new RaisedButton( // this is the submit button
+                          onPressed: _activeAddBtn==true ? (){
+                            onSubmitClicked();
+                          }:null,
+
+                          elevation: 4.0,
+                          color: Colors.green,
+                          child: new Text(
+                            'Add' ,
+                            style: new TextStyle( fontWeight: FontWeight.w500 , fontSize: 20.0 , color: Colors.white ),
+                          ),
                         ),
-                      )
+                        new FlatButton.icon(
+                          icon: new Icon(Icons.print , size: 30.0, color: Colors.white,),
+                          onPressed: _activePrintBtn==true ? (){printclcked();}:null,
+                          color: Colors.blue,
+                          label: new Text('print' , style: new TextStyle(color: Colors.white , fontSize: 15.0),),
+                          disabledColor: Colors.black12,
+
+                        )
+                      ],
+                    ),
+                  )
 
 
 
 
 
 
-                    ]
-                )
+                ]
+            )
 
           ],
 
 
 
 
-    ));
+        ));
 
   }
-
-
 }

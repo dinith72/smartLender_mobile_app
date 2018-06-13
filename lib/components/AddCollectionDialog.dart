@@ -21,6 +21,8 @@ class _AddCollectionDialog extends State<AddCollectionDialog>{
   List<String> periods = new List<String>();
   String _selPeriod = '';
   DateTime _date= null;
+  bool _activeAddBtn = true ;
+  bool _activePrintBtn = false ;
 
 
   @override
@@ -55,8 +57,16 @@ class _AddCollectionDialog extends State<AddCollectionDialog>{
     bool status = PaymentManagerDataLoader().sendCollectionDetials(widget.nic, amt, _selPeriod);
 
     if(status) {
-      Navigator.pushNamed(context, '/Payments');
+      setState(() {
+        _activeAddBtn = false ;
+        _activePrintBtn = true ;
+      });
+
     }
+  }
+
+  void onPrintClicked(){
+    Navigator.pushNamed(context, '/Payments');
   }
 
 
@@ -119,11 +129,11 @@ class _AddCollectionDialog extends State<AddCollectionDialog>{
                      mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
                      children: <Widget>[
                        new RaisedButton( // this is the submit button
-                           onPressed: (){
+                           onPressed: _activeAddBtn == true ? (){
                              if(_key.currentState.validate()){  // validation is checked here
                                onSubmitClicked();
                              }
-                           },
+                           }: null,
                            elevation: 4.0,
                            color: Colors.green,
                            child: new Text(
@@ -133,7 +143,10 @@ class _AddCollectionDialog extends State<AddCollectionDialog>{
                        ),
                        new FlatButton.icon(
                          icon: new Icon(Icons.print , size: 30.0, color: Colors.white,),
-                         onPressed: (){selectDate(context);},
+                         // the activenes of the button can be controlled with value ( 1 ,0 ) of _acivePrintBtn
+                         onPressed:_activePrintBtn==true ? //
+                             (){onPrintClicked();} // if active button is true this unction excuted , makes button active
+                             :null, // else no function excuted , meks the button inactive
                          color: Colors.blue,
                          label: new Text('print' , style: new TextStyle(color: Colors.white , fontSize: 15.0),),
                          disabledColor: Colors.black12,
