@@ -6,6 +6,7 @@ import 'package:mobile_app/controller/PaymentManagerDataloader.dart';
 import 'package:mobile_app/components/memberProfile.dart';
 import 'package:mobile_app/components/AddCollectionDialog.dart';
 import 'package:mobile_app/controller/Member.dart';
+import 'package:mobile_app/components/MemberProfileSigleMode.dart';
 
 
 class PaymentsManager extends StatefulWidget{
@@ -26,6 +27,7 @@ class _PaymentsManager extends State<PaymentsManager>{
   List <String> teams = new List<String>();
   List <Member> memList = new List<Member>();
   String _teamVal ;
+  bool _batchMode = true;
 
 
   void initState(){
@@ -33,6 +35,12 @@ class _PaymentsManager extends State<PaymentsManager>{
     memList = PaymentManagerDataLoader().getMembers();
     _teamVal = teams[0];
 
+  }
+
+  void batchModeToggle(bool value){
+    setState(() {
+      _batchMode = value;
+    });
   }
   Widget addButtonPressed(){
 
@@ -74,27 +82,30 @@ class _PaymentsManager extends State<PaymentsManager>{
 
   }
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new CustomAppBar().getAppBar(context,'Payments Manager'),
-        drawer: new CustomDrawer().getDrawer(context),
-        // the following template must be followed to get scrollabel windoe
-        body: new CustomScrollView( // the scroallable effect are applied to body
-          shrinkWrap: true, // essential code , get infine hight error if not used
-          slivers: <Widget>[
-            new SliverPadding(
-              padding: const EdgeInsets.all(0.0),
-              sliver: new SliverList(
-                delegate: new SliverChildListDelegate(
-                  <Widget>[
-                    _getComponents()
 
-                  ],
+      return new Scaffold(
+          appBar: new CustomAppBar().getAppBar(context, 'Payments Manager'),
+          drawer: new CustomDrawer().getDrawer(context),
+          // the following template must be followed to get scrollabel windoe
+          body: new CustomScrollView( // the scroallable effect are applied to body
+            shrinkWrap: true,
+            // essential code , get infine hight error if not used
+            slivers: <Widget>[
+              new SliverPadding(
+                padding: const EdgeInsets.all(0.0),
+                sliver: new SliverList(
+                  delegate: new SliverChildListDelegate(
+                    <Widget>[
+                      _getComponents()
+
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        )
-    );
+            ],
+          )
+      );
+
 
   }
 
@@ -137,6 +148,9 @@ class _PaymentsManager extends State<PaymentsManager>{
                           )
                       ),
 
+
+
+
                       new Container(
                           padding: const EdgeInsets.symmetric(horizontal: 5.0),
                           alignment: Alignment.centerRight,
@@ -153,34 +167,88 @@ class _PaymentsManager extends State<PaymentsManager>{
 
                           )
                       )
+                    
+                    
 
                     ],
+
                   ),
-                  new ListView.builder( // create the list view
+                  new  SwitchListTile(
+                        value: _batchMode,
+                        onChanged: (bool value){batchModeToggle(value);},
+                        title: new Text('Batch mode'),
+                      ),
 
-                      shrinkWrap: true, // essential code , infinete hight is shown without this code
-                      scrollDirection: Axis.vertical,
-                      itemCount: memList.length,
-                      itemBuilder: ( BuildContext context , int index ) {
-                        return new Card(
-                          child:  new MemberProfile( // get items of member profile ( components ) recursively
-                            member: memList[index], //
-
-
-                            onClicked: (String nic){memberSelected(nic);},
-                            onRemoved: (String nic){memberRemoved(nic);},
-                          ),
-
-
-                        );
-                      }
-                  )
+                  getMemberCard(),
+//                  new ListView.builder( // create the list view
+//
+//                      shrinkWrap: true, // essential code , infinete hight is shown without this code
+//                      scrollDirection: Axis.vertical,
+//                      itemCount: memList.length,
+//                      itemBuilder: ( BuildContext context , int index ) {
+//                        return new Card(
+//                          child:  new MemberProfile( // get items of member profile ( components ) recursively
+//                            member: memList[index], //
+//
+//
+//                            onClicked: (String nic){memberSelected(nic);},
+//                            onRemoved: (String nic){memberRemoved(nic);},
+//                          ),
+//
+//
+//                        );
+////                          getMemberCard(index);
+//                      }
+//                  )
 
                 ]
             )
         )
     );
   }
+  Widget getMemberCard(){
+    if(_batchMode){
+      return new ListView.builder( // create the list view
 
+          shrinkWrap: true, // essential code , infinete hight is shown without this code
+          scrollDirection: Axis.vertical,
+          itemCount: memList.length,
+          itemBuilder: ( BuildContext context , int index ) {
+            return new Card(
+              child:  new MemberProfile( // get items of member profile ( components ) recursively
+                member: memList[index], //
+
+
+                onClicked: (String nic){memberSelected(nic);},
+                onRemoved: (String nic){memberRemoved(nic);},
+              ),
+
+
+            );
+
+          }
+      );
+    }
+      else{
+      return new ListView.builder( // create the list view
+
+          shrinkWrap: true, // essential code , infinete hight is shown without this code
+          scrollDirection: Axis.vertical,
+          itemCount: memList.length,
+          itemBuilder: ( BuildContext context , int index ) {
+            return new Card(
+              child:  new MemberProfileSingleMode(
+                member: memList[index],
+              )
+
+
+            );
+
+          }
+      );
+
+    }
+
+  }
 
 }
