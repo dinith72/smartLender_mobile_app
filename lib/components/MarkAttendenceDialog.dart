@@ -70,6 +70,7 @@ class _MarkAttendenceDialog extends State<MarkAttendenceDialog>{
       print(s);
     }
     print (_type);
+    Navigator.pushNamed(context, '/Attendence');
   }
 
 

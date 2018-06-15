@@ -43,4 +43,19 @@ class Attendencecontroller {
     return memberList;
   }
 
+  List<String> getCenterNames(){
+    List<String> centerNames = new List<String>();
+    centerNames.add('center 01');
+    centerNames.add('center 02');
+    centerNames.add('center 03');
+    centerNames.add('center 04');
+    centerNames.add('center 05');
+    centerNames.add('center 06');
+    return centerNames;
+  }
+
+  String getCenterId(String name){
+    return 'cent1';
+  }
+
 }
