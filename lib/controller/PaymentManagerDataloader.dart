@@ -10,6 +10,21 @@ class PaymentManagerDataLoader{
     return teams;
   }
 
+  String getCenterId(String name){
+    return 'cent1';
+  }
+
+  List<String> getCenterNames(){
+    List<String> centerNames = new List<String>();
+    centerNames.add('center 01');
+    centerNames.add('center 02');
+    centerNames.add('center 03');
+    centerNames.add('center 04');
+    centerNames.add('center 05');
+    centerNames.add('center 06');
+    return centerNames;
+  }
+
   List <Member> getMembers(){
     List<Member> memberList = new List<Member>();
 //    members.addAll(['Dinith Jayabodhi', 'chamaka rajapakshe','wisura weerathunga','a','a','v']);

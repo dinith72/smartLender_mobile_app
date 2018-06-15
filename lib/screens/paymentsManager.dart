@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/main.dart';
+import 'package:material_search/material_search.dart';
 import 'package:mobile_app/components/appBar.dart';
 import 'package:mobile_app/components/CustomDrawer.dart';
 import 'package:mobile_app/controller/PaymentManagerDataloader.dart';
@@ -31,6 +31,9 @@ class _PaymentsManager extends State<PaymentsManager>{
   String _teamVal ;
   bool _batchMode = true;
   DateTime _date= null;
+  final _formKey = new GlobalKey<FormState>(); // search dialog form key
+  List<String> _centerList = new List<String>(); // list of centers in search
+   String _cenId = '';
 
 
   void initState(){
@@ -38,6 +41,7 @@ class _PaymentsManager extends State<PaymentsManager>{
     memList = PaymentManagerDataLoader().getMembers();
     _teamVal = teams[0];
     _date = DateTime.now();
+    _centerList = PaymentManagerDataLoader().getCenterNames();
 
   }
   Future<Null> selectDate(BuildContext context) async {
@@ -52,6 +56,14 @@ class _PaymentsManager extends State<PaymentsManager>{
         _date = cal; // updating the state
 
       });
+  }
+
+  void centerSearchSelected(dynamic center){
+//    print(center.toString());
+    _cenId =   PaymentManagerDataLoader().getCenterId(center.toString());
+    print(_cenId);
+//    Navigator.pushNamed(context, '/Payments');
+
   }
 
   void batchModeToggle(bool value){
@@ -136,10 +148,46 @@ class _PaymentsManager extends State<PaymentsManager>{
                 mainAxisSize: MainAxisSize.max,
 
                 children: <Widget>[
-                  new TextField(
-                      decoration: new InputDecoration(
-                          hintText: "Please enter center"
-                      )),
+//                  new TextField(
+//                      decoration: new InputDecoration(
+//                          hintText: "Please enter center"
+//                      )),
+                   new Form(
+                        key: _formKey,
+                       child: new Column(
+                         children: <Widget>[
+                       new MaterialSearchInput<String>(
+                         placeholder: 'Center Name',
+
+
+                         // retruns the list of items to the search dialog
+                         results: _centerList.map((String v) {
+
+                           return MaterialSearchResult<String>(
+                             icon: Icons.business,
+                             value: v,
+                             text: v,
+                           );
+                         }).toList(),
+                         filter: (dynamic value, String criteria) {
+
+                           return value.toLowerCase().trim()
+                               .contains(new RegExp(r'' + criteria.toLowerCase().trim() + ''));
+                         },
+                         onSelect: (dynamic value) {
+                          centerSearchSelected(value);
+
+                         },
+                         validator: (dynamic value) => value == null ? 'Required field' : null,
+                         formatter: (dynamic v) => v,
+                       ),
+
+
+
+                         ],
+                       ),
+
+                   ) ,
                   new DropdownButton(
                       value: _teamVal,
                       items: teams.map((String val){
