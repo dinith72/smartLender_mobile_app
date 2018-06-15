@@ -5,6 +5,9 @@ import 'package:mobile_app/modelClasses/CenterInfo.dart';
 import 'package:mobile_app/components/CenterWidget.dart';
 import 'package:mobile_app/controller/HomeController.dart';
 import 'package:date_format/date_format.dart';
+import 'package:geolocation/geolocation.dart';
+import 'dart:async';
+import 'package:mobile_app/components/alertWindow.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -29,6 +32,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Color _color = new Color.fromRGBO(118,162,237,1.0) ; // the texxt and the card color
   List<CenterInfo> centerList = new List<CenterInfo>();
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     _date = DateTime.now();
@@ -36,10 +41,41 @@ class _MyHomePageState extends State<MyHomePage> {
     _payAmnt = HomeController().getTotalPayments(_date);
     centerList = HomeController().getCenterInfo(_date);
   }
-  void locationSwitchclcked(bool val){
+  // this snack bar is ideally excuted when the confirmation arrive form the server
+  void onSubmitted() {
+    Scaffold.of(context).showSnackBar(
+        new SnackBar(
+            content: new Text('Location Data sent')
+        )
+    );
+  }
+  void locationSwitchclcked(bool val)async{
+    final GeolocationResult result = await Geolocation.requestLocationPermission(const LocationPermission(
+      android: LocationPermissionAndroid.fine,
+      ios: LocationPermissionIOS.always,
+    ));
+
+    if(result.isSuccessful) {
+//      print('successful');
+//
+       Geolocation.currentLocation(accuracy: LocationAccuracy.block).listen((res) {
+
+        if (res.isSuccessful) {
+          double lat = res.location.latitude;
+          double long = res.location.longitude;
+          print(lat.toString() + "  " + long.toString());
+//          onSubmitted();
+        }
+      });
+    } else {
+      alertWindow().WarningWindow(context,'cannot send GPS data');
+    }
     setState(() {
       _sendLoacation = val;
     });
+
+
+
   }
 
 

@@ -8,7 +8,7 @@ import 'package:mobile_app/screens/MemberInfo.dart';
 class alertWindow {
   List <Member>  mem ;
 
-  Widget WarningWindow(context){
+  Widget WarningWindow(context , String message){
     return(
         new AlertDialog(
 
@@ -21,7 +21,7 @@ class alertWindow {
 //              crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
 
-                  new Text('incorrect password'), // text
+                  new Text(message), // text
                   new RaisedButton(onPressed:(){Navigator.pop(context);}  , child: new Text('Ok'),), // on click button to close when it is pressed
                 ],
               )
