@@ -11,6 +11,7 @@ dependencies:
   #sqljocky5: "^1.0.0"
   flutter_search_bar: "^2.0.3"
   date_format: "^1.0.4"
+  material_search: "^0.2.7"
 
 dev_dependencies:
   flutter_test:

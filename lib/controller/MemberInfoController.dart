@@ -11,15 +11,16 @@ class MemberInfoController {
   String _attendence ;
   String _repayemnt ;
 
-
-
+  String getMemNic(String memName){
+    return '953280086v';
+  }
   List<String> getCenters(){
     _centers  = ['Gampaha' , 'colombo' , 'kelaniaya' , 'Ja_ela'];
     return _centers;
   }
 
   List<String> getMembers(){
-    _members = ['dinith' , 'akalanka' , 'chathura ' , 'pasan'];
+    _members = ['dinith jayaboshi' , 'akalanka jayalath' , 'chathura ' , 'pasan'];
     return _members;
   }
 
@@ -81,7 +82,7 @@ class MemberInfoController {
     List<Member> memList = new List<Member>();
     Member mem = new Member();
     mem.memNic = '953280086v';
-    mem.memName = 'dinith';
+    mem.memName = 'dinith  jayabodhi';
     Member mem1 = new Member();
     mem1.memNic = '953280087v';
     mem1.memName = 'chamaka';
