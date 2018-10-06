@@ -5,7 +5,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+//        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
     }
 }
 
@@ -20,6 +21,13 @@ rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+//packagingOptions{
+//    doNotStrip '*/mips/*.so'
+//    doNotStrip '*/mips64/*.so'
+//}
+//ndk {
+//    abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86' // <- only the supported ones
+//}
 subprojects {
     project.evaluationDependsOn(':app')
 }
