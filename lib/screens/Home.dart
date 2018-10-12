@@ -5,7 +5,7 @@ import 'package:mobile_app/modelClasses/CenterInfo.dart';
 import 'package:mobile_app/components/CenterWidget.dart';
 import 'package:mobile_app/controller/HomeController.dart';
 import 'package:date_format/date_format.dart';
-import 'package:geolocation/geolocation.dart';
+//import 'package:geolocation/geolocation.dart';
 import 'dart:async';
 import 'package:mobile_app/components/alertWindow.dart';
 
@@ -50,26 +50,26 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
   void locationSwitchclcked(bool val)async{
-    final GeolocationResult result = await Geolocation.requestLocationPermission(const LocationPermission(
-      android: LocationPermissionAndroid.fine,
-      ios: LocationPermissionIOS.always,
-    ));
+//    final GeolocationResult result = await Geolocation.requestLocationPermission(const LocationPermission(
+//      android: LocationPermissionAndroid.fine,
+//      ios: LocationPermissionIOS.always,
+//    )); // check whether an properly connectin with mobile device and the desktop devices
 
-    if(result.isSuccessful) {
-//      print('successful');
+//    if(result.isSuccessful) {
+////      print('successful');
+////
+//       Geolocation.currentLocation(accuracy: LocationAccuracy.block).listen((res) {
 //
-       Geolocation.currentLocation(accuracy: LocationAccuracy.block).listen((res) {
-
-        if (res.isSuccessful) {
-          double lat = res.location.latitude;
-          double long = res.location.longitude;
-          print(lat.toString() + "  " + long.toString());
-//          onSubmitted();
-        }
-      });
-    } else {
-      alertWindow().WarningWindow(context,'cannot send GPS data');
-    }
+//        if (res.isSuccessful) {
+//          double lat = res.location.latitude;
+//          double long = res.location.longitude;
+//          print(lat.toString() + "  " + long.toString());
+////          onSubmitted();
+//        }
+//      });
+//    } else {
+//      alertWindow().WarningWindow(context,'cannot send GPS data');
+//    }
     setState(() {
       _sendLoacation = val;
     });
